@@ -2,7 +2,7 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios=require("axios") //traemos axios para poderlo utilizar
-const { Temp, Dog, Op}=require("../db");
+const { Temperament, Dog, Op}=require("../db");
 const { YOUR_API_KEY } = process.env;
 
 const router = Router();
@@ -41,7 +41,7 @@ const getApiInfo = async () => {  //funciones controladoras luego se llaman en l
 const getDbInfo= async ()=>{    //esta funcion trae la info de bd
     return await Dog.findAll({
         include:{ //traigo todo los datos de la tabla temperament
-            model:Temp,
+            model:Temperament,
             attributes:["name"], //traigo solo el nombre de la tabla
             thorough:{
                 attributes:[], //traigo los datos de la tabla dog_temperament
@@ -103,7 +103,7 @@ const getDogsForIdDb = async (id) => { // Query a la base de datos en el cual tr
                 id:id //busco el id que recibo por parametro
             },
             include:{
-                model:Temp, //traigo los datos de la tabla temperament
+                model:Temperament, //traigo los datos de la tabla temperament
                 attributes:["name"], //traigo solo el nombre de la tabla
                 through:{
                     attributes:[], //traigo los datos de la tabla dog_temperament
@@ -164,12 +164,12 @@ router.get("/temperaments", async(req,res)=>{
 
     tempFilt.forEach((t) => {
       // se fija si el temperamento esta, si esta no hace nada, si no lo crea
-        Temp.findOrCreate({
+        Temperament.findOrCreate({
             where: { name: t },
         });
     });
 
-    const totalTemp = await Temp.findAll(); // me trae todos los temperamentos
+    const totalTemp = await Temperament.findAll(); // me trae todos los temperamentos
     res.json(totalTemp);
 })
 
@@ -186,16 +186,16 @@ router.post("/dogs", async(req, res)=>{
             weightMax: parseInt(weightMax),
             lifeMax: parseInt(lifeMax),
             lifeMin: parseInt(lifeMin),
+            temperament: temperament,
             createdInBd: true,
             image: image || "https://www.dogbreedslist.info/images/breeds/Chihuahua/Chihuahua1.jpg",
         })
         .then(async (dog) => {
-            const temp = await Temp.findOrCreate({ // se fija si el temperamento esta, si esta no hace nada, si no lo crea
+            const temp = await Temperament.findOrCreate({ // se fija si el temperamento esta, si esta no hace nada, si no lo crea
                 where: { name: temperament }, // si no esta lo crea
             });
-            dog.addTemp(temp[0]); // agrega el temperamento al dog
+            dog.addTemperament(temp[0].id); // se agrega el temperamento al dog
             res.status(201).send(dog);
-        
         }).catch(err => err)
 
         res.send("Perro creado");
