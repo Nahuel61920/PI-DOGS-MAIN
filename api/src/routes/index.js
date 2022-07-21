@@ -2,7 +2,9 @@ const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const axios=require("axios") //traemos axios para poderlo utilizar
-const { Temperament, Dog, Op}=require("../db");
+//const {API_KEY}= process.env
+const { Temperament, Dog }=require("../db");
+
 const { YOUR_API_KEY } = process.env;
 
 const router = Router();
@@ -13,143 +15,62 @@ const api = `https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`;
 // Ejemplo: router.use('/auth', authRouter);
 // esta funcion llama toda la informacion que requiero de la api externa
 const getApiInfo = async () => {  //funciones controladoras luego se llaman en las rutas
-    const apiUrl=  await axios.get(api)
+    const apiUrl=  await axios.get(api); //trae la info de la api
+    //console.log(apiUrl) 
     const apiInfo = await apiUrl.data.map(p => { 
+        const weightMin = parseInt(p.weight.metric.slice(4).trim()); 
         const weightMax = parseInt(p.weight.metric.slice(0, 2).trim());
-        const weightMin = parseInt(p.weight.metric.slice(4).trim());
-        const heightMax = parseInt(p.height.metric.slice(0, 2).trim());
         const heightMin = parseInt(p.height.metric.slice(4).trim()); 
-        const lifeMax = parseInt(p.life_span.slice(0, 2).trim());
-        const lifeMin = parseInt(p.life_span.slice(4).trim()); 
+        const heightMax = parseInt(p.height.metric.slice(0, 2).trim());
+        const life_spanMin = parseInt(p.life_span.slice(4).trim());
+        const life_spanMax = parseInt(p.life_span.slice(0, 2).trim()); 
 
         return {
+            id:p.id,
             name:p.name,
             heightMin:heightMin,
             heightMax:heightMax,
             weightMin:weightMin,
             weightMax:weightMax,
-            lifeMax:lifeMax,
-            lifeMin:lifeMin,
+            life_spanMin:life_spanMin,
+            life_spanMax:life_spanMax,
             temperament:p.temperament,
-            id:p.id,
+            createdInBd: false,
             image:p.image.url,
-        }
+        }   
     })
     return apiInfo
 }
-
-const getDbInfo= async ()=>{    //esta funcion trae la info de bd
-    return await Dog.findAll({
-        include:{ //traigo todo los datos de la tabla temperament
-            model:Temperament,
-            attributes:["name"], //traigo solo el nombre de la tabla
-            thorough:{
-                attributes:[], //traigo los datos de la tabla dog_temperament
-            }
-        }
+//console.log(apiInfo)
+const getDbInfo= async ()=>{ //esta funcion trae la info de bd
+    return await Dog.findAll({ // findAll es una funcion de sequelize que trae toda la info de la bd
+        include:[{ // include es una funcion de sequelize que trae la info de la tabla que se le pasa
+            model:Temperament, // model es una funcion de sequelize que trae la info de la tabla que se le pasa
+            through:{ attributes: [] } // through es una funcion de sequelize que trae la info de la tabla que se le pasa
+        }] 
     })
 }
 
-const getAllDogs = async () =>{ //esta funcion concatena los datos de la api y los de la bd
-    const apiInfo= await getApiInfo();
-    const dbInfo= await getDbInfo()
-    const totalInfo=apiInfo.concat(dbInfo) 
+const getAllDogs = async () =>{//esta funcion concatena los datos de la api y los de la bd
+    const apiInfo = await getApiInfo(); //trae la info de la api
+    const dbInfo = await getDbInfo() //trae la info de la bd
+    const totalInfo = apiInfo.concat(dbInfo) //concatena la info de la api y la de la bd
     return totalInfo
 }
 
-const getDogsForIdApi = async (id) => { // Query a la api externa en el cual traera solo los que contengan el id
-    try{
-        // Traigo todo los datos de la API
-        const results = await axios(api)
-
-        // Filtro por cada uno que incluya el nombre que recibo por parametro con el nombre de cada dog y lo guardo en un array 
-        const dogFound = await results.data.filter(dog => {
-            if(parseInt(dog.id) === parseInt(id)) return dog
-        })
-
-        const sortData = await dogFound.map(p => {
-            const weightMax = parseInt(p.weight.metric.slice(0, 2).trim());
-            const weightMin = parseInt(p.weight.metric.slice(4).trim());
-            const heightMax = parseInt(p.height.metric.slice(0, 2).trim());
-            const heightMin = parseInt(p.height.metric.slice(4).trim()); 
-            const lifeMax = parseInt(p.life_span.slice(0, 2).trim());
-            const lifeMin = parseInt(p.life_span.slice(4).trim());
-
-            return {
-                name:p.name,
-                heightMin:heightMin,
-                heightMax:heightMax,
-                weightMin:weightMin,
-                weightMax:weightMax,
-                lifeMax:lifeMax,
-                lifeMin:lifeMin,
-                temperament:p.temperament,
-                id:p.id,
-                image:p.image.url,
-            }
-        })
-        return sortData;
-
-    }catch(err){
-        console.log("error");
-        return err;
-    }
-}
-
-const getDogsForIdDb = async (id) => { // Query a la base de datos en el cual traera solo los que contengan el id
-    try{
-        const results = await Dog.findAll({ //traigo todo los datos de la bd
-            where:{
-                id:id //busco el id que recibo por parametro
-            },
-            include:{
-                model:Temperament, //traigo los datos de la tabla temperament
-                attributes:["name"], //traigo solo el nombre de la tabla
-                through:{
-                    attributes:[], //traigo los datos de la tabla dog_temperament
-                }
-            }
-        })
-        return results;
-
-    }catch(err){ 
-        console.log(err);
-        return err;
-    }
-}
-
 // aqui rutas solicitadas
-router.get("/dogs", async (req, res) =>{
-    const name=req.query.name //se pide por query
-    const dogs=await getAllDogs()
-    if(name){
-        const dogsName=dogs.filter(p=>p.name.toLowerCase().includes(name.toLowerCase())) //filtro por nombre
-        res.json(dogsName)
-    } else {
-        res.json(dogs) //si no se pasa ningun parametro traigo todos los datosS
+router.get("/dogs", async (req, res) =>{ // ?name="el nombre"
+    const name = req.query.name //se pide por query
+    const dogsTotales = await getAllDogs()//trae todos los perros
+    if(name){ //pregunta si hay un name por query
+        let dogsName = await dogsTotales.filter(ele => ele.name.toLowerCase().includes(name.toLowerCase()))//para no tener problema con las mays y minus
+        dogsName.length ?//encontraste el nombre?
+        res.status(200).send(dogsName):
+        res.status(404).send("No esta disponible");
+    }else{   
+        res.status(200).send(dogsTotales)//si no hay un query envia los perros totales
     }
-})
-
-
-router.get("/dogs/:id", async (req, res) =>{
-    if(req.params.id){ 
-        const { id } = req.params;
-        console.log(id)
-        try{
-            const ForIdApi = await getDogsForIdApi(id);  //trae los datos de la api
-            const ForId = await getDogsForIdDb(id); //trae los datos de la bd
-            
-            if(ForIdApi.length > 0 && id.length < 3) return res.status(200).json(ForIdApi); //si existe en la api y es menor a 3 digitos trae los datos de la api
-            if(ForId.length > 0) return res.status(200).json(ForId); //si existe en la bd trae los datos de la bd
-            return res.status(404).json({message:"No existe el id"}); //si no existe en la bd ni en la api trae un mensaje de error
-        }catch(err){
-            console.log(err)
-            res.send({error: err})
-        }
-    } else {
-        res.send({error: "no id"})
-    }
-})
+})//quiero guardar solo las ocupaciones en la bd y dejarlas listas para cada vez 
 
 router.get("/temperaments", async(req,res)=>{
     const tempApi = await axios(api);
@@ -163,45 +84,60 @@ router.get("/temperaments", async(req,res)=>{
     let tempFilt = [...new Set(filtro)]; // hago un nuevo array con los temperamentos que tenia guardados y los nuevos, si se repiten se quitan
 
     tempFilt.forEach((t) => {
-      // se fija si el temperamento esta, si esta no hace nada, si no lo crea
-        Temperament.findOrCreate({
-            where: { name: t },
+        // se fija si el temperamento esta, si esta no hace nada, si no lo crea
+        Temperament.findOrCreate({ // se fija si el temperamento esta, si esta no hace nada, si no lo crea
+            where: { name: t }, // se fija si el temperamento esta en la bd
         });
     });
 
-    const totalTemp = await Temperament.findAll(); // me trae todos los temperamentos
+    const totalTemp = await Temperament.findAll(); // findAll trae todos los temperamentos de la bd
     res.json(totalTemp);
 })
 
-router.post("/dogs", async(req, res)=>{
-    const { name, heightMax, heightMin, weightMax, weightMin, lifeMax, lifeMin, image, temperament} = req.body;
+router.post("/dogs", async(req, res)=>{// lo que requiere el body
+    const { name, heightMax, heightMin, weightMax, weightMin, life_spanMax, life_spanMin, image, temperament } = req.body;
         // Creo el Dog
 
-        if (heightMax && heightMin && weightMin && weightMax && name && temperament) { // si todos los campos estan llenos
-        Dog.create({ 
-            name: name,
-            heightMin: parseInt(heightMin),
-            heightMax: parseInt(heightMax),
-            weightMin: parseInt(weightMin),
-            weightMax: parseInt(weightMax),
-            lifeMax: parseInt(lifeMax),
-            lifeMin: parseInt(lifeMin),
-            temperament: temperament,
-            createdInBd: true,
-            image: image || "https://www.dogbreedslist.info/images/breeds/Chihuahua/Chihuahua1.jpg",
-        })
-        .then(async (dog) => {
-            const temp = await Temperament.findOrCreate({ // se fija si el temperamento esta, si esta no hace nada, si no lo crea
-                where: { name: temperament }, // si no esta lo crea
-            });
-            dog.addTemperament(temp[0].id); // se agrega el temperamento al dog
-            res.status(201).send(dog);
-        }).catch(err => err)
+        if(!name || !heightMax || !heightMin || !weightMax || !weightMin || !image || !temperament){
+            res.status(400).send("Faltan datos"); /// 400 porque faltan datos
+        } else{
+            Dog.create({ 
+                name: name,
+                heightMin: parseInt(heightMin),
+                heightMax: parseInt(heightMax),
+                weightMin: parseInt(weightMin),
+                weightMax: parseInt(weightMax),
+                life_spanMax: parseInt(life_spanMax),
+                life_spanMin: parseInt(life_spanMin),
+                createdInBd: true,
+                image: image || "https://www.dogbreedslist.info/images/breeds/Chihuahua/Chihuahua1.jpg",
+            })
+            .then(async (dog) => {
+                // Guardo el temperamento
+                const temp = await Temperament.findOrCreate({ // findOrCreate para que no se repita
+                    where: { name: temperament }, // where para que solo se guarde el temperamento que se le pasa
+                });
+                // Guardo el Dog en el temperamento
+                await dog.addTemperament(temp[0].id); // el [0] es porque es un arreglo
+                res.json(dog);
+            }).catch(err => err)
+    
+            res.send("Perro creado");
+        }
 
-        res.send("Perro creado");
-
-    } else {
-        res.send("Faltan datos");
-    }
+    
 })
+
+//ruta id
+router.get("/dogs/:id", async(req, res)=>{
+    const id = req.params.id;//requiere parametro id
+    const dogsTotales= await getAllDogs()//llama la funcion total de perros
+    if(id){//si tiene id
+        let dogId= await dogsTotales.filter(element=> element.id == id)//filtrar los perros totales por el id solicitado
+        dogId.length ?
+        res.status(200).json(dogId): 
+        res.status(404).send("Raza no encontrada")
+    }
+}) 
+
 module.exports = router;
