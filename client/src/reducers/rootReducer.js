@@ -1,5 +1,7 @@
 import { 
-    GET_ALL_DOGS, 
+    GET_ALL_DOGS,
+    GET_DESCRIPTION,
+    GET_CLEAN
 } 
 from "../action-types/index";
 
@@ -7,6 +9,7 @@ from "../action-types/index";
 const initialState = {
     allDogs: [],
     dogsFilter: [],
+    dogDescription: [],
 }
 
 
@@ -23,7 +26,19 @@ const rootReducer = (state = initialState, action) => {
                 dogsFilter: arrayAux 
             }
 
-        
+        case GET_DESCRIPTION:
+            // obtener la descripcion de cada raza seleccionada
+            return{
+                ...state,
+                dogDescription: action.payload// Obtengo el perro seleccionado
+            }
+
+        case GET_CLEAN:
+            // limpiar el estado
+            return{
+                ...state,
+                dogDescription: action.payload 
+            }
 
         default:
             return state; // Retorno el estado actual

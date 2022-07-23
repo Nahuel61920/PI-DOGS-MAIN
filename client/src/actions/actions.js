@@ -1,11 +1,9 @@
 import { 
     GET_ALL_DOGS,
+    GET_DESCRIPTION,
+    GET_CLEAN
 } from "../action-types/index";
 import axios from "axios";
-import dotenv from "dotenv";
-dotenv.config();
-
-axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 //Obtener
 
@@ -55,3 +53,25 @@ export const getAllDogs = () => {
     }   
 }
 
+export const getDescription = (id) => {
+    // Enviar el id al reducere para crear la seccion de Description
+    return async function (dispatch) {
+        try {
+            var json = await axios.get(`/dogs/${id}`);
+            return dispatch ({
+                type: GET_DESCRIPTION,
+                payload: json.data
+            })
+        }
+        catch(error) {
+            console.log(error)
+        }
+    }
+}
+
+export function getClean () {
+    return{
+        type: GET_CLEAN,
+        payload: []
+    }
+}

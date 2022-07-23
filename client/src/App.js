@@ -11,7 +11,7 @@ function App() {
         <Route exact path="/" element={<LandingPage />} />
         <Route exact path="/home" element={<Home />} />
         <Route exact path='/home/:id' element={<CardDogDetail />} />
-        <Route path= "/*" element={<Error404 />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
   );
 }

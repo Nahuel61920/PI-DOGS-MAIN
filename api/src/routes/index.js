@@ -18,12 +18,12 @@ const getApiInfo = async () => {  //funciones controladoras luego se llaman en l
     const apiUrl=  await axios.get(api); //trae la info de la api
     //console.log(apiUrl) 
     const apiInfo = await apiUrl.data.map(p => { 
-        const weightMin = parseInt(p.weight.metric.slice(4).trim()); 
-        const weightMax = parseInt(p.weight.metric.slice(0, 2).trim());
-        const heightMin = parseInt(p.height.metric.slice(4).trim()); 
-        const heightMax = parseInt(p.height.metric.slice(0, 2).trim());
-        const life_spanMin = parseInt(p.life_span.slice(4).trim());
-        const life_spanMax = parseInt(p.life_span.slice(0, 2).trim()); 
+        const weightMin = parseInt(p.weight.metric.slice(0, 2).trim()); 
+        const weightMax = parseInt(p.weight.metric.slice(4).trim());
+        const heightMin = parseInt(p.height.metric.slice(0, 2).trim()); 
+        const heightMax = parseInt(p.height.metric.slice(4).trim());
+        const life_spanMin = parseInt(p.life_span.slice(0, 2).trim());
+        const life_spanMax = parseInt(p.life_span.slice(4).trim()); 
 
         return {
             id:p.id,
@@ -129,15 +129,20 @@ router.post("/dogs", async(req, res)=>{// lo que requiere el body
 })
 
 //ruta id
-router.get("/dogs/:id", async(req, res)=>{
-    const id = req.params.id;//requiere parametro id
-    const dogsTotales= await getAllDogs()//llama la funcion total de perros
-    if(id){//si tiene id
-        let dogId= await dogsTotales.filter(element=> element.id == id)//filtrar los perros totales por el id solicitado
-        dogId.length ?
-        res.status(200).json(dogId): 
-        res.status(404).send("Raza no encontrada")
+router.get("/dogs/:id", async(req, res, next)=>{
+    try {
+        const id = req.params.id;//requiere parametro id
+        const dogsTotales= await getAllDogs()//llama la funcion total de perros
         
+        const dog = dogsTotales.find(ele => ele.id == id);//busca el perro por id
+
+        if(!dog){
+            res.status(404).send("No esta disponible");
+        } else {
+            res.status(200).send(dog);
+        }
+    } catch (error) {
+        next(error);
     }
 }) 
 

@@ -2,10 +2,15 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import styles from "./cardDogs.module.css";
 
+import { useDispatch } from "react-redux";
+
+//
+import { getDescription } from "../../actions/actions";
 
 function CardDogs({name, weightMin, weightMax, temperament, image, id}) {
 
     const temperamentTemp = !temperament ? ["N/A"] : temperament.split(",")
+    const dispatch = useDispatch()
 
     return (
         <div className ={styles.card}>
@@ -13,8 +18,8 @@ function CardDogs({name, weightMin, weightMax, temperament, image, id}) {
                 <div className={styles.name}>
                     <h1>{name}</h1>
                 </div>
-                <Link to={`/dogs/${id}`}>
-                    <img src={image} alt={name} className={styles.image}/>
+                <Link to={`/home/${id}`}>
+                    <img src={image} alt={name} className={styles.image} onClick={() => dispatch(getDescription(id))}/> {/* Envio el id al reducer para crear la seccion de Description */}
                 </Link>
                 <div className={styles.container__info}>
                     <p>Peso: Min: {weightMin}kg - Max: {weightMax}kg</p>
