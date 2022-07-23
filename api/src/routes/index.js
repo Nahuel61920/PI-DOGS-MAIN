@@ -118,7 +118,7 @@ router.post("/dogs", async(req, res)=>{// lo que requiere el body
                     where: { name: temperament }, // where para que solo se guarde el temperamento que se le pasa
                 });
                 // Guardo el Dog en el temperamento
-                await dog.addTemperament(temp[0].id); // el [0] es porque es un arreglo
+                await dog.addTemperament(temp[0]); // el [0] es porque es un arreglo
                 res.json(dog);
             }).catch(err => err)
     
@@ -137,6 +137,7 @@ router.get("/dogs/:id", async(req, res)=>{
         dogId.length ?
         res.status(200).json(dogId): 
         res.status(404).send("Raza no encontrada")
+        
     }
 }) 
 
