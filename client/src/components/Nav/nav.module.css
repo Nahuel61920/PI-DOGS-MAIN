@@ -42,6 +42,25 @@
     margin-right: 10px;
 }
 
+.create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 0 0 8rem;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+    height: 40px;
+    gap: 40px;
+}
+
+.create p {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+}
 
 .create_button {
     --color: #fff;

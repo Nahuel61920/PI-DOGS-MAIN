@@ -7,6 +7,8 @@ import styles from "./cardDogDetail.module.css";
 // Modulos internos
 import { getDescription, getClean } from "../../actions/actions";
 
+import loading from "../../assets/loading.gif";
+
 function CardDogDetail() {
 
   
@@ -56,7 +58,7 @@ function CardDogDetail() {
               </div>
             </div>
           ) : (
-            <img src="https://cdn.dribbble.com/users/1782673/screenshots/4683964/ezgif.com-video-to-gif__2_.gif" alt="loading" />
+            <img src={loading} alt="loading" />
 
           )
         }

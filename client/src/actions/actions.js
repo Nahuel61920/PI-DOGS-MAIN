@@ -1,9 +1,10 @@
 import { 
     GET_ALL_DOGS,
-    GET_TEMPERAMENTS,
+    GET_ALL_TEMPERAMENT,
     GET_DESCRIPTION,
     GET_CLEAN,
-    GET_DOGS_FOR_NAME
+    GET_DOGS_FOR_NAME,
+    FILTER_TEMPERAMENT
 } from "../action-types/index";
 import axios from "axios";
 
@@ -55,6 +56,16 @@ export const getAllDogs = () => {
     }   
 }
 
+export const getAllTemperament = () => {
+    // Obtengo todos los temperamentos de mi back
+    return (dispatch) => {
+        axios("/temperaments") //trae todos los temperamentos
+        .then(response => { //mapeo los datos de la api
+            dispatch({type: GET_ALL_TEMPERAMENT, payload: response.data}) //dispatcheo el array de temperamentos
+        })
+    }
+}
+
 export const getDescription = (id) => {
     // Enviar el id al reducere para crear la seccion de Description
     return async function (dispatch) {
@@ -92,5 +103,12 @@ export const getDogsForName = (name) => {
     .catch(() => {
             alert("Doggie not found!")
         })
+    }
+}
+
+export const filterTemperament = (temperamento) => {
+    return {
+        type: FILTER_TEMPERAMENT,
+        payload: temperamento
     }
 }

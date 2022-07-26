@@ -11,10 +11,10 @@ export default function Pagination({dogsPerPage, currentPage, allDogs, paginado}
     return(
     
         <ul className={styles.paginated}>
-            {pageNumbers &&
-            pageNumbers.map(number=> (
-                <li className={currentPage === number ? styles.active : ''} key={number} onClick={()=>paginado(number)}>
-                    <p className= {styles.current} >{number}</p>
+            {pageNumbers && 
+            pageNumbers.map(number=> ( //map para recorrer el array
+                <li className={currentPage === number ? styles.active : ''} key={number} onClick={()=>paginado(number)}> {/* si el numero de pagina es igual al currentPage, le pongo la clase active */}
+                    <p className= {styles.current} >{number}</p> {/* muestro el numero de pagina */}
                 </li>
             ))}
         </ul>

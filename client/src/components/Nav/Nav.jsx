@@ -14,9 +14,11 @@ function Nav() {
                 </Link>
             </div>
             <div className={styles.create}>
+                <p>Favorites</p>
                 <Link to={'/create-dog'}>
                     <button className={styles.create_button}>Crear Perro</button>
                 </Link>
+                <p>Aboult</p>
             </div>
             <div className={styles.searchBar}>
                 <SearchBar />
