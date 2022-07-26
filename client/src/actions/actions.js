@@ -1,7 +1,9 @@
 import { 
     GET_ALL_DOGS,
+    GET_TEMPERAMENTS,
     GET_DESCRIPTION,
-    GET_CLEAN
+    GET_CLEAN,
+    GET_DOGS_FOR_NAME
 } from "../action-types/index";
 import axios from "axios";
 
@@ -40,10 +42,10 @@ export const getAllDogs = () => {
                 }
 
                 else if(dog.createdInBd === false) { // Aplico logica extra a los que vienen de la DB ya que viene un objeto y quiero convertilo en un string
-                    const temp = dog.temperament.map(tempe => tempe.name)  //mapeo los temperamentos de la bd
+                    const temp = dog.temperament.map( temp => temp.toLowerCase()).join(", "); //convierte el objeto en un string 
                     return {
                         ...dog, //copio todos los datos del perro
-                        temperament: temp.join(",") //concateno los nombres de los temperamentos
+                        temperament: temp, //agrega el string al perro
                     }
                 }
             })
@@ -57,7 +59,7 @@ export const getDescription = (id) => {
     // Enviar el id al reducere para crear la seccion de Description
     return async function (dispatch) {
         try {
-            var json = await axios.get(`/dogs/${id}`);
+            const json = await axios.get(`/dogs/${id}`);
             return dispatch ({
                 type: GET_DESCRIPTION,
                 payload: json.data
@@ -73,5 +75,22 @@ export function getClean () {
     return{
         type: GET_CLEAN,
         payload: []
+    }
+}
+
+export const getDogsForName = (name) => {
+    //obtener todos los perros que coincidan con el nombre que pasamos por parametro
+    return function (dispatch) {
+        axios.get("/dogs?name=" + name)
+        .then((dogs => {
+            dispatch({
+                type: GET_DOGS_FOR_NAME,
+                payload: dogs.data
+            })
+        }))
+        
+    .catch(() => {
+            alert("Doggie not found!")
+        })
     }
 }

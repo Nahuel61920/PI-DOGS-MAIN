@@ -1,40 +1,24 @@
-export const pagination = (dogs) => {
-    let result = [];
-    let newArray = [];
-    let index = 0;
+import React from 'react';
+import styles from './home.module.css';
 
-    // empiezo a recorrer el array que me pasan por parametro
-    for(let i = 0; i < dogs.length; i++){
-        
-        // comprueba si la longitud del array que me pasan es menor a 8
-        if(dogs.length < 8){
-            //declaro el ultimo numero en la longitud del array
-            const lastIndex = dogs.length - 1;
 
-            //pregunto si el indice es igual al ultimo indice del array
-            if(i === lastIndex){
-                newArray.push(dogs[i]) // pusheo cada elemento del array a newArray
-                result.push(newArray) // guardo en result el new array con los perros que tenga almacenado
-                newArray = []; // limpio el newArray
-                index = 0; // reseto el indice
-            }else{
-                newArray.push(dogs[i]) // en caso que no sea i === ultimoIndice voy a ir guardando los valores en newArray
-                index++; // incremento el index
-            }
+export default function Pagination({dogsPerPage, currentPage, allDogs, paginado}) {
+    const pageNumbers = []; //array que guarda los numeros de paginas
 
-        }// si es mayor o igual a 8 entro en este else
-        else if( dogs.length >= 8){
-
-            if(index === 8){
-                result.push(newArray) // si el indice = 8, quiere decir que el newArray tiene 8 elementos lo que hago es guardar ese array con 8 valores en result y resetear el newArray y el indice para volver a iniciar las validaciones
-                newArray = [];
-                index = 0;
-            }else{
-                newArray.push(dogs[i]) // guardo en newArray todos los dos hasta llegar a un maximo de 8
-                index++; // incremento el indice
-                
-            }
-        }
+    for(let i=1; i<=Math.ceil(allDogs/dogsPerPage); i++){ // ceil: redondea hacia arriba
+        pageNumbers.push(i) //agrega los numeros de paginas al array
     }
-    return result;
+    return(
+    
+        <ul className={styles.paginated}>
+            {pageNumbers &&
+            pageNumbers.map(number=> (
+                <li className={currentPage === number ? styles.active : ''} key={number} onClick={()=>paginado(number)}>
+                    <p className= {styles.current} >{number}</p>
+                </li>
+            ))}
+        </ul>
+
+    )
+    
 }

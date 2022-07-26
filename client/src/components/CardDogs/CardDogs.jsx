@@ -9,7 +9,7 @@ import { getDescription } from "../../actions/actions";
 
 function CardDogs({name, weightMin, weightMax, temperament, image, id}) {
 
-    const temperamentTemp = !temperament ? ["N/A"] : temperament.split(",")
+    const temperamentTemp = !temperament ? ["N/A"] : temperament.split(",") ; // si no hay temperamento, lo pongo en N/A
     const dispatch = useDispatch()
 
     return (
@@ -26,7 +26,7 @@ function CardDogs({name, weightMin, weightMax, temperament, image, id}) {
                 </div>
                 <div className={styles.temperament}>
                     {
-                        temperamentTemp.map((temps, index) => {
+                        temperamentTemp.map((temps, index) => { // recorro el array de temperamentos, index es el indice del array
                             if( index < 6 ) {
                                 return <p key={index}>{temps}</p> //solo muestro 6 temperamentos
                             } 

@@ -61,7 +61,7 @@ const getAllDogs = async () =>{//esta funcion concatena los datos de la api y lo
 // aqui rutas solicitadas
 router.get("/dogs", async (req, res) =>{ // ?name="el nombre"
     const name = req.query.name //se pide por query
-    const dogsTotales = await getAllDogs()//trae todos los perros
+    let dogsTotales = await getAllDogs()//trae todos los perros
     if(name){ //pregunta si hay un name por query
         let dogsName = await dogsTotales.filter(ele => ele.name.toLowerCase().includes(name.toLowerCase()))//para no tener problema con las mays y minus
         dogsName.length ?//encontraste el nombre?
@@ -114,12 +114,12 @@ router.post("/dogs", async(req, res)=>{// lo que requiere el body
             })
             .then(async (dog) => {
                 // Guardo el temperamento
-                const temp = await Temperament.findOrCreate({ // findOrCreate para que no se repita
+                const temp = await Temperament.findAll({ // findOrCreate para que no se repita
                     where: { name: temperament }, // where para que solo se guarde el temperamento que se le pasa
                 });
                 // Guardo el Dog en el temperamento
-                await dog.addTemperament(temp[0]); // el [0] es porque es un arreglo
-                res.json(dog);
+                await dog.addTemperament(temp); // addTemperament es una funcion de sequelize que guarda el temperamento en el dog
+                res.status(201).send(dog); // 201 porque se creo
             }).catch(err => err)
     
             res.send("Perro creado");

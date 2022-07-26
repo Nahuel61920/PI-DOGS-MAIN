@@ -1,14 +1,16 @@
 import { 
     GET_ALL_DOGS,
     GET_DESCRIPTION,
-    GET_CLEAN
+    GET_CLEAN,
+    GET_DOGS_FOR_NAME
 } 
 from "../action-types/index";
 
 // Estado inicial
 const initialState = {
-    allDogs: [],
-    dogsFilter: [],
+    allDogs: [], // Array de perros
+    dogsFilter: [], // Array de perros filtrados
+    temperaments: [],
     dogDescription: [],
 }
 
@@ -23,7 +25,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state, // Obtengo el estado actual
                 allDogs: action.payload, // Obtengo el array de dogs
-                dogsFilter: arrayAux 
+                dogsFilter: arrayAux  // Guardo el array de dogs filtrados
             }
 
         case GET_DESCRIPTION:
@@ -38,6 +40,13 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 dogDescription: action.payload 
+            }
+
+        case GET_DOGS_FOR_NAME:
+            // filtrar los perros por nombre
+            return{
+                ...state,
+                dogsFilter: action.payload
             }
 
         default:

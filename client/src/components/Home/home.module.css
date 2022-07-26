@@ -18,17 +18,49 @@
   margin-bottom: 1rem;
 }
 
-.pagination {
+.paginated {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
+    margin: 0;
+    padding: 0;
 }
 
-.pagination button {
-    background: #07182E;
+.paginated li {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: #07182E;
+  border: 2px solid rgb(0, 183, 255);
+  border-radius: 10px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.paginated .active {
+  border: 2px solid rgb(255, 48, 255);
+}
+
+.pag__button{
+  background: #07182E;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button_none {
+  background: #07182e83;
     border: 1px solid #000;
     border-radius: 5px;
     padding: 5px;
@@ -36,7 +68,8 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #fff;
-    cursor: pointer;
+    cursor: no-drop!important;
+    pointer-events: none;
 }
 
 .cards {

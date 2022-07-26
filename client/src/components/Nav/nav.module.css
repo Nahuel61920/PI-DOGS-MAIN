@@ -1,0 +1,100 @@
+.nav_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.nav {
+    background-color: rgb(26, 24, 24);
+    border-bottom: 1px solid #e5e5e5;
+    border-radius: 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+    padding: 2rem 0;
+    z-index: 10;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 0;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+    height: 40px;
+}
+
+.logo_container img {
+    height: 70px;
+    width: 70px;
+    margin-right: 10px;
+}
+
+
+.create_button {
+    --color: #fff;
+    --color2: rgb(10, 25, 30);
+    padding: 0.7em 1.50em;
+    background-color: transparent;
+    border-radius: 6px;
+    border: .3px solid var(--color);
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 1.5rem;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+}
+
+.create_button::after, .create_button::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: var(--color);
+}
+
+.create_button::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.create_button:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+}
+
+.create_button:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.create_button:hover {
+    color: var(--color2);
+}
+
+.create_button:active {
+    filter: brightness(.7);
+    transform: scale(.98);
+   }
