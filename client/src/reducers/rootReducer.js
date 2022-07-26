@@ -4,7 +4,8 @@ import {
     GET_DESCRIPTION,
     GET_CLEAN,
     GET_DOGS_FOR_NAME,
-    FILTER_TEMPERAMENT
+    FILTER_TEMPERAMENT,
+    ORDER_BY_NAME
 } 
 from "../action-types/index";
 
@@ -67,7 +68,28 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogsFilter: arrayAux
             }
+        
+        case ORDER_BY_NAME:
+            // ordenar los perros por nombre
+            if(action.payload === "asc"){
+                arrayAux = state.dogsFilter.sort((a, b) => {
+                    if(a.name < b.name) return -1; // si el nombre de a es menor que el de b, a va antes que b
+                    if(a.name > b.name) return 1; // si el nombre de a es mayor que el de b, a va despues que b
+                    return 0;
+                })
+            } else {
+                arrayAux = state.dogsFilter.sort((a, b) => { // sort es una funcion de array que ordena los elementos de un array
+                    if(a.name > b.name) return -1; // si el nombre de a es mayor que el de b, a va antes que b
+                    if(a.name < b.name) return 1; // si el nombre de a es menor que el de b, a va despues que b
+                    return 0;
+                })
+            }
 
+
+            return{
+                ...state,
+                dogsFilter: arrayAux
+            }
 
         default:
             return state; // Retorno el estado actual

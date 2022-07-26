@@ -8,6 +8,7 @@ import {
   getAllDogs,
   getAllTemperament,
   filterTemperament,
+  orderByName,
 } from "../../actions/actions";
 //importo los componentes que voy a usar
 import CardDogs from "../CardDogs/CardDogs";
@@ -42,11 +43,13 @@ function Home() {
   function handleFilterByTemperament(e) {
     e.preventDefault(e);
     dispatch(filterTemperament(e.target.value)); // llamo a la action que me interesa
-    setCurrentPage(1);
-    setOrder(e.target.value); // cambio el orden de los perritos
   }
 
-  
+  function handleSort(e) {
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+  }
+
   return (
     <div className={styles.container}>
       <Nav />
@@ -57,23 +60,35 @@ function Home() {
       </div>
 
       <div>
+        <select className={styles.select} onChange={(e) => handleSort(e)}>
+          <option value="" disabled selected>
+            Alphabetical order
+          </option>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
+        </select>
         <select
           className={styles.select}
           onChange={(e) => handleFilterByTemperament(e)} // llamo a la action que me interesa
         >
-          <option value="" disabled selected> 
+          <option value="" disabled selected>
             Filter by temperament
           </option>
-          <option value="all">All</option> 
-          {temperaments.map((temp) => ( // recorro el array de temperamentos
-            <option key={temp.id} value={temp.name}>  {/* creo un option por cada temperamento */}
-              {temp.name} {/* muestro el nombre del temperamento */}
-            </option>
-          ))}
+          <option value="all">All</option>
+          {temperaments.map(
+            (
+              temp // recorro el array de temperamentos
+            ) => (
+              <option key={temp.id} value={temp.name}>
+                {" "}
+                {/* creo un option por cada temperamento */}
+                {temp.name} {/* muestro el nombre del temperamento */}
+              </option>
+            )
+          )}
         </select>
       </div>
 
-      
       <Pagination
         dogsPerPage={dogsPerPage} // cantidad de perritos por pagina
         allDogs={dogsFilter.length} // cantidad de perritos
@@ -83,10 +98,7 @@ function Home() {
 
       <div className={styles.cards}>
         {!currentDogs.length > 0 ? (
-          <img
-            src={loading}
-            alt="loading"
-          /> // si dogsFilter esta vacio muestro una imagen de cargando
+          <img src={loading} alt="loading" /> // si dogsFilter esta vacio muestro una imagen de cargando
         ) : (
           currentDogs.map((dog) => (
             <CardDogs

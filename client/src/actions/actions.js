@@ -4,7 +4,8 @@ import {
     GET_DESCRIPTION,
     GET_CLEAN,
     GET_DOGS_FOR_NAME,
-    FILTER_TEMPERAMENT
+    FILTER_TEMPERAMENT,
+    ORDER_BY_NAME
 } from "../action-types/index";
 import axios from "axios";
 
@@ -106,9 +107,19 @@ export const getDogsForName = (name) => {
     }
 }
 
+// Filers
+
 export const filterTemperament = (temperamento) => {
     return {
         type: FILTER_TEMPERAMENT,
         payload: temperamento
+    }
+}
+
+export function orderByName(payload){
+   
+    return {
+        type: ORDER_BY_NAME,
+        payload
     }
 }
