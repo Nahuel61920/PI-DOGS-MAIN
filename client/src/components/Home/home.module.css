@@ -24,8 +24,13 @@
   margin-bottom: 1rem;
 }
 
+.filter{
+  display: flex;
+  gap: 1rem;
+}
+
 .select {
-  width: 100%;
+  width: 200PX;
   height: 40px;
   line-height: 28px;
   padding: 0 1rem;

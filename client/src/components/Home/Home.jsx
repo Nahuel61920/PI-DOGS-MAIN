@@ -9,6 +9,7 @@ import {
   getAllTemperament,
   filterTemperament,
   orderByName,
+  orderByWeight
 } from "../../actions/actions";
 //importo los componentes que voy a usar
 import CardDogs from "../CardDogs/CardDogs";
@@ -23,7 +24,7 @@ import Nav from "../Nav/Nav";
 
 function Home() {
   const dispatch = useDispatch(); // useDispatch() para poder usar la action
-  let { temperaments, dogsFilter } = useSelector((state) => state); // obtengo el estado actual del store
+  let { temperamen, dogsFilter } = useSelector((state) => state); // obtengo el estado actual del store
   const [order, setOrder] = useState("");
 
   useEffect(() => {
@@ -43,23 +44,35 @@ function Home() {
   function handleFilterByTemperament(e) {
     e.preventDefault(e);
     dispatch(filterTemperament(e.target.value)); // llamo a la action que me interesa
+    setCurrentPage(1);
+    setOrder(e.target.value); // cambio el orden de los perritos
   }
 
   function handleSort(e) {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setOrder(e.target.value); 
+  }
+
+  function handleSortWeight(e) {
+    e.preventDefault();
+    dispatch(orderByWeight(e.target.value));
+    setCurrentPage(1);
+    setOrder(e.target.value);
   }
 
   return (
     <div className={styles.container}>
-      <Nav />
+      <Nav setCurrentPage={setCurrentPage}/>
       <div className={styles.title}>
         <div className={styles.title__text}>
           <h1>PI Dogs</h1>
         </div>
       </div>
 
-      <div>
+
+      <div className={styles.filter}>
         <select className={styles.select} onChange={(e) => handleSort(e)}>
           <option value="" disabled selected>
             Alphabetical order
@@ -75,7 +88,7 @@ function Home() {
             Filter by temperament
           </option>
           <option value="all">All</option>
-          {temperaments.map(
+          {temperamen.map(
             (
               temp // recorro el array de temperamentos
             ) => (
@@ -86,6 +99,26 @@ function Home() {
               </option>
             )
           )}
+        </select>
+      </div>
+      <div className={styles.filter}>
+        <select className={styles.select} onChange={(e) => handleSort(e)}>
+          <option value="" disabled selected>
+            Filter by create
+          </option>
+          <option value="all">All</option>
+          <option value="api">API</option>
+          <option value="db">DB</option>
+        </select>
+        <select
+          className={styles.select}
+          onChange={(e) => handleSortWeight(e)} // llamo a la action que me interesa
+        >
+          <option value="" disabled selected>
+            Order by weight
+          </option>
+          <option value="min">Weight Min</option>
+          <option value="max">Weight Max</option>
         </select>
       </div>
 

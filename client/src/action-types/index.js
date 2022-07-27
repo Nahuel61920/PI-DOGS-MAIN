@@ -5,4 +5,5 @@ export const GET_DESCRIPTION = "GET_DESCRIPTION"; // get description
 export const GET_CLEAN = "GET_CLEAN"; // get clean
 export const FILTER_TEMPERAMENT = "FILTER_TEMPERAMENT"; // filter temperament
 export const ORDER_BY_NAME = "ORDER_BY_NAME"; // order by name
+export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT"; // order by weight
 

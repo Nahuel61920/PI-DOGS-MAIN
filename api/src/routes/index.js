@@ -96,11 +96,23 @@ router.get("/temperaments", async(req,res)=>{
 
 router.post("/dogs", async(req, res)=>{// lo que requiere el body
     const { name, heightMax, heightMin, weightMax, weightMin, life_spanMax, life_spanMin, image, temperament } = req.body;
-        // Creo el Dog
+    let temperamentId = await Temperament.findOne({ // se fija si el temperamento esta en la bd
+        where: { name: temperament }
+    });
+    let dogName = await getApiInfo().then((d) => d.find((d) => d.name === name)); // se fija si el nombre esta en la api
+    // Creo el Dog
 
-        if(!name || !heightMax || !heightMin || !weightMax || !weightMin || !image || !temperament){
+        if(!name || !heightMax || !heightMin || !weightMax || !weightMin || !temperament){
             res.status(400).send("Faltan datos"); /// 400 porque faltan datos
-        } else{
+        } else if (dogName){ // si el nombre esta en la api
+            res.status(404).send("El nombre del perro ya existe"); // 404 porque el nombre ya existe
+        } else if (heightMax < heightMin || weightMax < weightMin || life_spanMax < life_spanMin){
+            res.status(400).send("Los datos minimos no pueden ser mayor a los datos maximos"); // 400 porque los datos son invalidos
+        } else if (heightMax > 100 || heightMin < 0 || weightMax > 100 || weightMin < 0 || life_spanMax > 100 || life_spanMin < 0){
+            res.status(400).send("Datos invalidos"); // 400 porque los datos son invalidos
+        } else if (temperamentId === null){
+            res.status(400).send("Temperamento invalido"); // 400 porque el temperamento es invalido
+        } else {
             Dog.create({ 
                 name: name,
                 heightMin: parseInt(heightMin),
@@ -124,7 +136,6 @@ router.post("/dogs", async(req, res)=>{// lo que requiere el body
     
             res.send("Perro creado");
         }
-
     
 })
 

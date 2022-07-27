@@ -4,7 +4,7 @@ import logo from "../../assets/6Troy4q7c.png";
 import styles from "./nav.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 
-function Nav() {
+function Nav({setCurrentPage}) {
   return (
     <div className={styles.nav_container}>
         <nav className={styles.nav}>
@@ -16,12 +16,12 @@ function Nav() {
             <div className={styles.create}>
                 <p>Favorites</p>
                 <Link to={'/create-dog'}>
-                    <button className={styles.create_button}>Crear Perro</button>
+                    <button className={styles.create_button}>Create Dog</button>
                 </Link>
                 <p>Aboult</p>
             </div>
             <div className={styles.searchBar}>
-                <SearchBar />
+                <SearchBar setCurrentPage={setCurrentPage}/>
             </div>
         </nav>
     </div>

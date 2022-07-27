@@ -8,7 +8,7 @@ import SearchSvg from "../SVG/SearchSvg";
 
 import styles from "./searchBar.module.css";
 
-function SearchBar() {
+function SearchBar({setCurrentPage}) {
     const dispatch = useDispatch()
     const [name, setName] = useState("");
     const navigate = useNavigate();
@@ -21,20 +21,17 @@ function SearchBar() {
         setName(e.target.value)
         dispatch(getDogsForName(name))
         navigate('/home')
-    }
-
-    function handleSubmit(e){
-        e.preventDefault(); 
+        setCurrentPage(1);
     }
 
 
     return (
-        <form onSubmit={handleSubmit} className={styles.group}>
-                <SearchSvg type='submit' onClick={handleSubmit}/>
+        <form className={styles.group}>
+                <SearchSvg/>
                 <input
                     className={styles.input} 
                     type="text"
-                    placeholder="Buscar Perrito..."
+                    placeholder="Search Dog..."
                     onChange= {handleInputChange}
                     value={name}
                 />
