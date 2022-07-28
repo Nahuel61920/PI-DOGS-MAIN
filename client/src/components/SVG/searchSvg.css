@@ -1,7 +1,7 @@
-.icon {
+.icon-2 {
     position: absolute;
     left: 1rem;
-    fill: #0606f0!important;
+    fill: rgb(48, 45, 45);
     width: 2rem;
     height: 2rem;
 }

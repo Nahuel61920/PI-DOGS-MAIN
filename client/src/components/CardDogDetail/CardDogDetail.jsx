@@ -12,25 +12,25 @@ import loading from "../../assets/loading.gif";
 function CardDogDetail() {
 
   
-  const myDogs = useSelector((state) => state.dogDescription);
+  const { dogDescription } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getDescription(id));
     return () => {
-      dispatch(getClean());
+      dispatch(getClean()); // limpia el state
     }
   }, [dispatch, id]);
 
-  const { name, weightMin, weightMax, heightMin, heightMax, life_spanMax, life_spanMin, image, temperament } = myDogs;
+  const { name, weightMin, weightMax, heightMin, heightMax, life_spanMax, life_spanMin, image, temperament } = dogDescription;
 
   
 
   return (
     <div className={styles.container}>
         {
-          Object.keys(myDogs).length > 0 ? ( // si hay datos en el state entra
+          Object.keys(dogDescription).length > 0 ? ( // si hay datos en el state entra
             <div className={styles.card}>
               <div className={styles.card_container}>
               <div className={styles.button_back}>
@@ -59,7 +59,6 @@ function CardDogDetail() {
             </div>
           ) : (
             <img src={loading} alt="loading" />
-
           )
         }
       

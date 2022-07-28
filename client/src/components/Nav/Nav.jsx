@@ -9,7 +9,7 @@ function Nav({setCurrentPage}) {
     <div className={styles.nav_container}>
         <nav className={styles.nav}>
             <div className={styles.logo_container}>
-                <Link to={'/home'}>
+                <Link to={'/'}>
                     <img src={logo} alt="logo" className={styles.logo} />
                 </Link>
             </div>

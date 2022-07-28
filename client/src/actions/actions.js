@@ -6,7 +6,8 @@ import {
     GET_DOGS_FOR_NAME,
     FILTER_TEMPERAMENT,
     ORDER_BY_NAME,
-    ORDER_BY_WEIGHT
+    ORDER_BY_WEIGHT,
+    FILTER_CREATED
 } from "../action-types/index";
 import axios from "axios";
 
@@ -79,7 +80,7 @@ export const getDescription = (id) => {
             })
         }
         catch(error) {
-            console.log(error)
+            alert("Error al obtener la descripcion")
         }
     }
 }
@@ -93,18 +94,9 @@ export function getClean () {
 
 export const getDogsForName = (name) => {
     //obtener todos los perros que coincidan con el nombre que pasamos por parametro
-    return function (dispatch) {
-        axios.get("/dogs?name=" + name)
-        .then((dogs => {
-            dispatch({
-                type: GET_DOGS_FOR_NAME,
-                payload: dogs.data
-            })
-        }))
-        
-    .catch(() => {
-            alert("Doggie not found!")
-        })
+    return {
+        type: GET_DOGS_FOR_NAME,
+        payload: name
     }
 }
 
@@ -127,6 +119,13 @@ export function orderByName(payload){
 export function orderByWeight(payload){
     return {
         type: ORDER_BY_WEIGHT,
+        payload
+    }
+}
+
+export function filterCreated(payload){ 
+    return {    
+        type: FILTER_CREATED,
         payload
     }
 }

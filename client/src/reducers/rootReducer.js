@@ -6,7 +6,8 @@ import {
     GET_DOGS_FOR_NAME,
     FILTER_TEMPERAMENT,
     ORDER_BY_NAME,
-    ORDER_BY_WEIGHT
+    ORDER_BY_WEIGHT,
+    FILTER_CREATED
 } 
 from "../action-types/index";
 
@@ -54,9 +55,12 @@ const rootReducer = (state = initialState, action) => {
 
         case GET_DOGS_FOR_NAME:
             // filtrar los perros por nombre
+            arrayAux = state.payload === ""
+            ? state.allDogs
+            : state.allDogs.filter(dog => dog.name.toLowerCase().includes(action.payload.toLowerCase())) // Obtengo el array de dogs filtrados
             return{
                 ...state,
-                dogsFilter: action.payload
+                dogsFilter: arrayAux
             }
         
         case FILTER_TEMPERAMENT:
@@ -93,25 +97,43 @@ const rootReducer = (state = initialState, action) => {
                 dogsFilter: arrayAux
             }
 
-            case ORDER_BY_WEIGHT:
-                if(action.payload === "min"){
-                    arrayAux = state.dogsFilter.sort((a, b) => {
-                        if(a.weightMin < b.weightMin) return -1; // si el peso de a es menor que el de b, a va antes que b
-                        if(a.weightMin > b.weightMin) return 1; // si el peso de a es mayor que el de b, a va despues que b
-                        return 0;
-                    })
-                } else {
-                    arrayAux = state.dogsFilter.sort((a, b) => {
-                        if(a.weightMin > b.weightMin) return -1; // si el peso de a es mayor que el de b, a va antes que b
-                        if(a.weightMin < b.weightMin) return 1; // si el peso de a es menor que el de b, a va despues que b
-                        return 0;
-                    })
-                }
+        case ORDER_BY_WEIGHT:
+            if(action.payload === "min"){
+                arrayAux = state.dogsFilter.sort((a, b) => {
+                    if(a.weightMin < b.weightMin) return -1; // si el peso de a es menor que el de b, a va antes que b
+                    if(a.weightMin > b.weightMin) return 1; // si el peso de a es mayor que el de b, a va despues que b
+                    return 0;
+                })
+            } else {
+                arrayAux = state.dogsFilter.sort((a, b) => {
+                    if(a.weightMin > b.weightMin) return -1; // si el peso de a es mayor que el de b, a va antes que b
+                    if(a.weightMin < b.weightMin) return 1; // si el peso de a es menor que el de b, a va despues que b
+                    return 0;
+                })
+            }
 
-                return{
-                    ...state,
-                    dogsFilter: arrayAux
-                }
+            return{
+                ...state,
+                dogsFilter: arrayAux
+            }
+
+        case FILTER_CREATED:
+            if(action.payload === "all"){
+                arrayAux = state.allDogs; // si el filtro es all, muestro todos los perros
+            } else if(action.payload === "api"){
+                arrayAux = state.allDogs.filter(dog => {
+                    if(dog.createdInBd === false) return dog; // si el perro fue creado por la api lo muestro
+                })
+            } else {
+                arrayAux = state.allDogs.filter(dog => {
+                    if(dog.createdInBd === true) return dog; // si el perro fue creado por la api lo muestro
+                })
+            } 
+            return{
+                ...state,
+                dogsFilter: arrayAux
+            }
+
 
         default:
             return state; // Retorno el estado actual

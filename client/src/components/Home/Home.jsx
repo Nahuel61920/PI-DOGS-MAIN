@@ -9,14 +9,13 @@ import {
   getAllTemperament,
   filterTemperament,
   orderByName,
-  orderByWeight
+  orderByWeight,
+  filterCreated
 } from "../../actions/actions";
 //importo los componentes que voy a usar
 import CardDogs from "../CardDogs/CardDogs";
 // Paginacion
 import Pagination from "./pagination.js";
-import NextSvg from "../SVG/NextSvg";
-import PrevSvg from "../SVG/PrevSvg";
 // Estilos del componente
 import loading from "../../assets/loading.gif";
 import styles from "./home.module.css";
@@ -25,19 +24,19 @@ import Nav from "../Nav/Nav";
 function Home() {
   const dispatch = useDispatch(); // useDispatch() para poder usar la action
   let { temperamen, dogsFilter } = useSelector((state) => state); // obtengo el estado actual del store
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState(""); // guardo el orden en el que se muestran los perros
 
   useEffect(() => {
     dispatch(getAllDogs()); // llamo a la action que me interesa
     dispatch(getAllTemperament()); // llamo a la action que me interesa
-  }, []); // [] para que no se ejecute cada vez que se renderiza el componente
+  }, [dispatch]); // [] para que no se ejecute cada vez que se renderiza el componente
 
   //pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const [dogsPerPage, setDogsPerPage] = useState(8);
-  const indexOfLastDog = currentPage * dogsPerPage;
-  const indexOfFirstDog = indexOfLastDog - dogsPerPage;
-  const currentDogs = dogsFilter.slice(indexOfFirstDog, indexOfLastDog);
+  const [currentPage, setCurrentPage] = useState(1);  
+  const [dogsPerPage, setDogsPerPage] = useState(8); //cantidad de dogs por pagina
+  const indexOfLastDog = currentPage * dogsPerPage; // calculo el indice del ultimo perro que se va a mostrar
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage; // calculo el indice del primer perro que se va a mostrar
+  const currentDogs = dogsFilter.slice(indexOfFirstDog, indexOfLastDog); // obtengo los perros que se van a mostrar
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -62,6 +61,13 @@ function Home() {
     setOrder(e.target.value);
   }
 
+  function handleFilterByCreated(e) {
+    e.preventDefault();
+    dispatch(filterCreated(e.target.value));
+    setCurrentPage(1);
+    setOrder(e.target.value);
+  }
+
   return (
     <div className={styles.container}>
       <Nav setCurrentPage={setCurrentPage}/>
@@ -78,7 +84,7 @@ function Home() {
             Alphabetical order
           </option>
           <option value="asc">A-Z</option>
-          <option value="desc">Z-A</option>
+          <option value="des">Z-A</option>
         </select>
         <select
           className={styles.select}
@@ -88,9 +94,7 @@ function Home() {
             Filter by temperament
           </option>
           <option value="all">All</option>
-          {temperamen.map(
-            (
-              temp // recorro el array de temperamentos
+          {temperamen.map((temp // recorro el array de temperamentos
             ) => (
               <option key={temp.id} value={temp.name}>
                 {" "}
@@ -102,8 +106,8 @@ function Home() {
         </select>
       </div>
       <div className={styles.filter}>
-        <select className={styles.select} onChange={(e) => handleSort(e)}>
-          <option value="" disabled selected>
+        <select className={styles.select} onChange={(e) => handleFilterByCreated(e)}>
+          <option value="" disabled selected> 
             Filter by create
           </option>
           <option value="all">All</option>
@@ -139,7 +143,6 @@ function Home() {
               id={dog.id}
               name={dog.name}
               image={dog.image}
-              description={dog.description}
               temperament={dog.temperament}
               weightMin={dog.weightMin}
               weightMax={dog.weightMax}

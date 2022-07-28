@@ -1,8 +1,9 @@
 import * as React from "react";
 import './next_prev.css';
 
+
 const NextSvg = (props) => (
-    <div className="wrapper">
+    <div className="wrapper btn-slide next">
         <svg
         width={18}
         height={17}
