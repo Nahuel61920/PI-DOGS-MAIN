@@ -20,7 +20,6 @@ export const getAllDogs = () => {
         axios.get("/dogs") //trae todos los perros
         .then(response => {
             const mapeo = response.data.map(dog => { //mapeo los datos de la api
-                if(dog.createdInBd === false){ //si el perro no esta en la bd
                     if(dog.weightMax && dog.weightMin) return dog;  //si el perro tiene peso 
                     else{
                         if(!dog.weightMax && !dog.weightMin){ //si el perro no tiene peso
@@ -43,20 +42,21 @@ export const getAllDogs = () => {
                             }
                         }
                     }
-                }
-
-                else if(dog.createdInBd === false) { // Aplico logica extra a los que vienen de la DB ya que viene un objeto y quiero convertilo en un string
-                    const temp = dog.temperament.map( temp => temp.toLowerCase()).join(", "); //convierte el objeto en un string 
-                    return {
-                        ...dog, //copio todos los datos del perro
-                        temperament: temp, //agrega el string al perro
-                    }
-                }
             })
             dispatch({type: GET_ALL_DOGS, payload: mapeo}) //dispatcheo el array de perros
         })
         .catch(err => new Error(err))
     }   
+}
+
+export function getDogs() {
+    return async function(dispatch) {
+        var json = await axios.get("/dogs");
+        return dispatch({
+            type: GET_ALL_DOGS,
+            payload: json.data
+        });
+    }
 }
 
 export const getAllTemperament = () => {

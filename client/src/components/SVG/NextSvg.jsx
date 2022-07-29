@@ -9,6 +9,7 @@ const NextSvg = (props) => (
         height={17}
         viewBox="-1 0 18 17"
         xmlns="http://www.w3.org/2000/svg"
+        className="svg-arrow"
         {...props}
         >
             <path

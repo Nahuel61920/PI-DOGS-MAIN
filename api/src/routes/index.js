@@ -43,12 +43,35 @@ const getApiInfo = async () => {  //funciones controladoras luego se llaman en l
 }
 //console.log(apiInfo)
 const getDbInfo= async ()=>{ //esta funcion trae la info de bd
-    return await Dog.findAll({ // findAll es una funcion de sequelize que trae toda la info de la bd
-        include:[{ // include es una funcion de sequelize que trae la info de la tabla que se le pasa
-            model:Temperament, // model es una funcion de sequelize que trae la info de la tabla que se le pasa
-            through:{ attributes: [] } // through es una funcion de sequelize que trae la info de la tabla que se le pasa
-        }] 
-    })
+    try {
+        const dogs = await Dog.findAll({ //trae todos los perros de la bd
+            include: Temperament, //trae los temperamentos de la bd
+        });
+
+        const info = dogs.map(dog => { //mapea los datos de la bd
+            let temp = dog.temperaments.map(te => te.name); //trae los temperamentos de la bd
+            let aux = temp.join(", "); //convierte el array de temperamentos en un string
+            
+            return {
+                id: dog.id,
+                name: dog.name,
+                heightMin: parseInt(dog.heightMin),
+                heightMax: parseInt(dog.heightMax),
+                weightMin: parseInt(dog.weightMin),
+                weightMax: parseInt(dog.weightMax),
+                life_spanMin: parseInt(dog.life_spanMin),
+                life_spanMax: parseInt(dog.life_spanMax),
+                temperament: aux,
+                createdInBd: true,
+                image: dog.image
+            };
+
+        })
+
+        return info;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const getAllDogs = async () =>{//esta funcion concatena los datos de la api y los de la bd
@@ -122,7 +145,7 @@ router.post("/dogs", async(req, res)=>{// lo que requiere el body
                 life_spanMax: parseInt(life_spanMax),
                 life_spanMin: parseInt(life_spanMin),
                 createdInBd: true,
-                image: image || "https://www.dogbreedslist.info/images/breeds/Chihuahua/Chihuahua1.jpg",
+                image: image || "https://www.dogbreedslist.info/uploads/dog-pictures/beagle-2.jpg",
             })
             .then(async (dog) => {
                 // Guardo el temperamento
