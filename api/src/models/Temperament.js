@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: true // no puede ser nulo
+        allowNull: false // 
       }
     },
     { timestamps: false }

@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Form from '../Form/Form.jsx';
 
 function CreateDog() {
   return (
-    <div>CreateDog</div>
+    <div>
+      <Form />
+    </div>
   )
 }
 

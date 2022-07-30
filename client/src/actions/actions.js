@@ -22,23 +22,29 @@ export const getAllDogs = () => {
             const mapeo = response.data.map(dog => { //mapeo los datos de la api
                     if(dog.weightMax && dog.weightMin) return dog;  //si el perro tiene peso 
                     else{
-                        if(!dog.weightMax && !dog.weightMin){ //si el perro no tiene peso
+                        if(dog.name === "Smooth Fox Terrier"){ //si el perro no tiene peso
                             return {
                                 ...dog,
-                                weightMin: "N/A ",
-                                weightMax: "N/A ",
-                            }
+                                weightMin: 6,
+                                weightMax: 9, 
+                            } // 6-9 peso del Smooth Fox Terrier
+                        } else if(dog.name === "Olde English Bulldogge"){
+                            return {
+                                ...dog,
+                                weightMin: 20,
+                                weightMax: 30,
+                            } // 10-15 peso del Olde English Bulldogge
                         }
 
                         if(!dog.weightMax){ //si el perro no tiene peso maximo
                             return {
                                 ...dog,
-                                weightMax: "N/A ",
+                                weightMax: dog.weightMin + 2 // si el perro no tiene peso maximo le sumo uno
                             }
-                        }else{ // si el perro no tiene peso minimo
+                        } else{ // si el perro no tiene peso minimo
                             return {
                                 ...dog,
-                                weightMin: "N/A ",
+                                weightMin: dog.weightMax - 2 // si el perro no tiene peso minimo le resto uno
                             }
                         }
                     }
@@ -129,3 +135,14 @@ export function filterCreated(payload){
         payload
     }
 }
+
+export const postDog = (data) => {
+    return async function (dispatch) {
+        try {
+            const res = await axios.post(`/dogs`, data);
+            return res;
+        } catch (e) {
+            console.log(e);
+        }
+    };
+};

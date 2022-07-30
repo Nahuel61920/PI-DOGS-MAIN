@@ -6,7 +6,65 @@
 html {
   /* 1rem = 10px */
   font-size: 62.5%;
+  /* Color variables */
+  --primary-color: #32353c  ;
+  --secondary-color: #e8e8e8;
+  --button_color: linear-gradient(225deg, #181818, #32353c);
+  --border_bottom_create: none;
+  --box_shadow_create: -4px -4px 4px rgba(255, 255, 255, 0.08), 4px 4px 4px rgba(0, 0, 0, 0.56), 0 0 0 rgba(255, 255, 255, 0.08) inset, 0 0 0 rgba(0, 0, 0, 0.56) inset;
+  --background_create: #32353c
+;
+  --box_shadow_create_active: inset -5px 5px 10px #191919,
+                              inset 5px -5px 10px #292929;
+  --background_search: #32353c
+;
+  --box_shadow_search: -2px -2px 2px rgba(255, 255, 255, 0.08), 2px 2px 2px rgba(0, 0, 0, 0.56), 2px 2px 2px rgba(255, 255, 255, 0.08) inset, -2px -2px 2px rgba(0, 0, 0, 0.56) inset;
+  --box_shadow_paginated: -2px -2px 2px rgba(255, 255, 255, 0.08), 2px 2px 2px rgba(0, 0, 0, 0.56), 2px 2px 2px rgba(255, 255, 255, 0.08) inset, -2px -2px 2px rgba(0, 0, 0, 0.56) inset;
+  --box_shadow_paginated_active: -2px -2px 2px rgba(255, 255, 255, 0.08), 2px 2px 2px rgba(0, 0, 0, 0.56), 2px 2px 2px rgba(255, 255, 255, 0.08) inset, -2px -2px 2px rgba(0, 0, 0, 0.56) inset;
+  --border_paginated: 0 solid rgba(0, 0, 0, 0);
+  --background_paginated: linear-gradient(150deg, #32353c, #222);
+  --background_paginated_active:  linear-gradient(330deg, #32353c, #111);
+  --background_card: #141414;
+  --box_shadow_card: 0 0 0 rgba(255, 255, 255, 0.08), 0 0 0 rgba(0, 0, 0, 0.56), -4px -4px 4px rgba(255, 255, 255, 0.08) inset, 4px 4px 4px rgba(0, 0, 0, 0.56) inset;;
+  --color_card: #f2f8ff;
+  --imagen_card: -4px -4px 4px rgba(255, 255, 255, 0.08), 4px 4px 4px rgba(0, 0, 0, 0.56), 0 0 0 rgba(255, 255, 255, 0.08) inset, 0 0 0 rgba(0, 0, 0, 0.56) inset;
+  --select_focus: rgb(0, 183, 255);
+  --title_page: #f2f8ff;
 }
+
+/* Color variables if the theme is dark */
+html[data-theme="dark"] {
+  --primary-color: #e8e8e8;
+  --secondary-color: #07182E;
+  --button_color: #e8e8e8;
+  --border_bottom_create: 1px solid #e8e8e8;
+  --box_shadow_create: 6px 6px 12px #c5c5c5,
+                      -6px -6px 12px #ffffff;
+  --background_create: #e8e8e8;
+  --box_shadow_create_active: inset 4px 4px 12px #c5c5c5,
+                              inset -4px -4px 12px #ffffff;
+  --background_search: #e8e8e8;
+  --box_shadow_search: 6px 6px 12px #ffffff,
+                      -6px -6px 12px #c5c5c5;
+  --box_shadow_paginated: 6px 6px 12px #c5c5c5,
+                          -6px -6px 12px #ffffff;
+  --box_shadow_paginated_active:  inset 5px 5px 10px #a9a9aa77,
+                                  inset -5px -5px 10px #ffffff7e;
+  --border_paginated: 1px solid rgb(255, 255, 255, 0.20);
+  --background_paginated: #e8e8e8;
+  --background_paginated_active: #e8e8e8;
+  --border_paginated_active:  inset 5px 5px 10px #a9a9aa77,
+                              inset -5px -5px 10px #ffffff7e;
+  --background_card: #f2f2f3;
+  --box_shadow_card: inset 5px 5px 10px #a9a9aa77,
+                      inset -5px -5px 10px #ffffff7e;
+  --color_card: #07182E;
+  --imagen_card: -5px -5px 8px #ffffff7a, 5px 5px 8px #a9a9aa7a;
+  --select_focus: rgb(15, 19, 54);
+  --title_page: #000;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,7 +73,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
-  color: #212529;
+  color: var(--primary-color);
 }
 
 code {

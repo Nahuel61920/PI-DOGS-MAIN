@@ -131,7 +131,7 @@ router.post("/dogs", async(req, res)=>{// lo que requiere el body
             res.status(404).send("El nombre del perro ya existe"); // 404 porque el nombre ya existe
         } else if (heightMax < heightMin || weightMax < weightMin || life_spanMax < life_spanMin){
             res.status(400).send("Los datos minimos no pueden ser mayor a los datos maximos"); // 400 porque los datos son invalidos
-        } else if (heightMax > 100 || heightMin < 0 || weightMax > 100 || weightMin < 0 || life_spanMax > 100 || life_spanMin < 0){
+        } else if (heightMax > 200 || heightMin < 0 || weightMax > 100 || weightMin < 0 || life_spanMax > 30 || life_spanMin < 0){
             res.status(400).send("Datos invalidos"); // 400 porque los datos son invalidos
         } else if (temperamentId === null){
             res.status(400).send("Temperamento invalido"); // 400 porque el temperamento es invalido

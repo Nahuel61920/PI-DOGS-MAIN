@@ -9,8 +9,8 @@
 
 
 .nav {
-    background-color: rgb(26, 24, 24);
-    border-bottom: 1px solid #e5e5e5;
+    background-color: var(--primary-color);
+    border-bottom: 4px solid rgb(26, 24, 24);
     border-radius: 0;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 0;
@@ -57,63 +57,29 @@
 }
 
 .create p {
-    color: #fff;
+    color: rgb(128, 157, 168);
     font-size: 2rem;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.create p:hover {
+    color: rgb(0, 183, 255);
 }
 
 .create_button {
-    --color: #fff;
-    --color2: rgb(10, 25, 30);
-    padding: 0.7em 1.50em;
-    background-color: transparent;
-    border-radius: 6px;
-    border: .3px solid var(--color);
-    transition: .5s;
-    position: relative;
-    overflow: hidden;
+    color: var(--secondary-color);
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: var(--button_color);
+    border: var(--border_bottom_create);
+    box-shadow: var(--box_shadow_create);
     cursor: pointer;
-    z-index: 1;
-    font-weight: 300;
-    font-size: 1.5rem;
-    font-family: 'Roboto', 'Segoe UI', sans-serif;
-    text-transform: uppercase;
-    color: var(--color);
-}
-
-.create_button::after, .create_button::before {
-    content: '';
-    display: block;
-    height: 100%;
-    width: 100%;
-    transform: skew(90deg) translate(-50%, -50%);
-    position: absolute;
-    inset: 50%;
-    left: 25%;
-    z-index: -1;
-    transition: .5s ease-out;
-    background-color: var(--color);
-}
-
-.create_button::before {
-    top: -50%;
-    left: -25%;
-    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
-}
-
-.create_button:hover::after {
-    transform: skew(45deg) translate(-50%, -50%);
-}
-
-.create_button:hover::before {
-    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
-}
-
-.create_button:hover {
-    color: var(--color2);
 }
 
 .create_button:active {
-    filter: brightness(.7);
-    transform: scale(.98);
-   }
+    color: #666;
+    background: var(--background_create);
+    box-shadow: var(--box_shadow_create_active);
+}

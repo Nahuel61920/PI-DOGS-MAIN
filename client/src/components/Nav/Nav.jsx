@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from "../../assets/6Troy4q7c.png";
 import styles from "./nav.module.css";
 import SearchBar from "../SearchBar/SearchBar";
+import DarkMode from '../DarkMode/DarkMode';
 
 function Nav({setCurrentPage}) {
   return (
@@ -12,6 +13,9 @@ function Nav({setCurrentPage}) {
                 <Link to={'/'}>
                     <img src={logo} alt="logo" className={styles.logo} />
                 </Link>
+            </div>
+            <div>
+                <DarkMode/>
             </div>
             <div className={styles.create}>
                 <p>Favorites</p>

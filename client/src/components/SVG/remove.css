@@ -1,0 +1,8 @@
+.tooltip {
+    width: 20px;
+    height: 20px;
+}
+
+.remove {
+    z-index: 0;
+}

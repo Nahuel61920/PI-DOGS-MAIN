@@ -7,4 +7,5 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME"; // order by name
 export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT"; // order by weight
 export const FILTER_CREATED = "FILTER_CREATED"; // filter created
 export const GET_CLEAN = "GET_CLEAN"; // get clean
+export const POST_DOG = "POST_DOG" ; // post dogs
 

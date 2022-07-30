@@ -1,0 +1,154 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  background: var(--primary-color);
+  min-height: 100vh;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 50%;
+  color: var(--secondary-color);
+}
+
+.info img {
+  object-fit: cover;
+  padding: 0.2rem;
+  margin: 0 auto;
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+    aspect-ratio: 1;
+    background: #f2f2f3;
+    margin-bottom: 0.4em;
+    box-shadow: var(--imagen_card);
+    transition: 0.3s ease;
+}
+.tempsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+
+.tempsSelected{
+    display: flex;
+    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0 1.2rem 0 .5rem;
+    background-color: var(--background_search);
+    box-shadow: var(--box_shadow_create);
+    color: var(--secondary-color);
+}
+
+.tempsSelected button{
+    cursor: pointer;
+    background: none;
+    color: #cc5f6c;
+    z-index: 99999;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+.tempsSelected button:hover{
+  color: rgb(245, 13, 13);
+}
+
+.title {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+
+
+.formBox:hover {
+  box-shadow: 0 10px 40px #00000080;
+}
+
+.formBox input {
+  margin: 5px;
+  height: 10px;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #fff;
+}
+
+.inputs input {
+  width: 44%;
+}
+
+.formBox {
+  text-align: center;
+  width: 40%;
+  height: fit-content;
+  margin: 20px;
+  padding: 2rem;
+  height: 580px;
+  font-family: "Poppins", sans-serif;
+  background: rgb(241, 241, 241);
+  box-shadow: 0 8px 32px #00000080;
+  border-radius: 0.6rem;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.minMax {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.error {
+  color: #63222a;
+}
+
+.btn {
+  color: #090909;
+  padding: 0.2rem 1.2rem;
+  width: 200px;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #eeeeee62;
+  border: 2px solid #000000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn_disabled {
+  color: #0909096e;
+  padding: 0.2rem 1.2rem;
+  width: 200px;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #eeeeee62;
+  border: 2px solid #0909096e;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 1000px){
+  .container{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .formBox{
+    width: 100vw;
+    margin: 25px 0;
+    border-radius: 0;
+  }
+}

@@ -7,7 +7,8 @@ import {
     FILTER_TEMPERAMENT,
     ORDER_BY_NAME,
     ORDER_BY_WEIGHT,
-    FILTER_CREATED
+    FILTER_CREATED,
+    POST_DOG
 } 
 from "../action-types/index";
 
@@ -133,8 +134,9 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 dogsFilter: arrayAux
             }
-
-
+        
+            case POST_DOG:
+                return { ...state };
         default:
             return state; // Retorno el estado actual
     }

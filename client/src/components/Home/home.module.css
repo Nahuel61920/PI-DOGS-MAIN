@@ -5,11 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(../../assets/home.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  
+  background: var(--primary-color);
 }
 
 .title {
@@ -20,13 +16,13 @@
   font-family: 'Dog';
   font-size: 3rem;
   font-weight: bold;
-  color: #000;
+  color: var(--title_page);
   margin-bottom: 1rem;
 }
 
 .filter{
   display: flex;
-  gap: 1rem;
+  gap: 5rem;
 }
 
 .select {
@@ -37,21 +33,25 @@
   border: 2px solid transparent;
   border-radius: 8px;
   outline: none;
-  background-color: #07182E;
-  color: #fff;
-  transition: .3s ease;
-  margin-bottom: 2rem;
+  background-color: var(--background_search);
+  box-shadow: var(--box_shadow_create);
+  color: var(--secondary-color);
+  margin-bottom: 3rem;
+}
+
+.select:focus {
+  color: var(--select_focus);
 }
 
 .paginated {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .paginated li {
@@ -60,51 +60,37 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  background: #07182E;
-  border: 2px solid rgb(0, 183, 255);
   border-radius: 10px;
   width: 40px;
   cursor: pointer;
+  box-shadow: var(--box_shadow_paginated);
+  border: var(--border_paginated);
+  background-color: var(--background_paginated);
+  color: var(--secondary-color);
 }
 
 .paginated .active {
-  border: 2px solid rgb(255, 48, 255);
+  box-shadow: var(--box_shadow_paginated_active);
+  border: var(--border_paginated);
+  background: var(--background_paginated_active);
+  color: rgb(0, 183, 255);
 }
 
-.pag__button{
-  background: #07182E;
-  border: 1px solid #000;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-  font-size: 1.5rem;
+
+.paginated p {
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #fff;
-  cursor: pointer;
 }
 
-.button_none {
-  background: #07182e83;
-    border: 1px solid #000;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 5px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    cursor: no-drop!important;
-    pointer-events: none;
-}
 
 .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem auto;
-    width: 100%;
-    max-width: 1200px;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
 }
 

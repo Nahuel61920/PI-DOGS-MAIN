@@ -50,10 +50,16 @@ function CardDogDetail() {
                   <img src={image} alt={name} className={styles.image} />
                 </div>
                 <div className={styles.container__info}>
-                  <p>These dogs can weight between {weightMin ? weightMin : "N/A "} and {weightMax ? weightMax : "N/A "} kg</p>
+                  <p>These dogs can weight between {weightMin} and {weightMax} kg</p>
                   <p>And measure between {heightMin ? heightMin : "N/A "} and {heightMax ? heightMax : "N/A "} cm</p>
                   <p>Their average age is between {life_spanMin ? life_spanMin : "N/A "} and {life_spanMax ? life_spanMax : "N/A "} years</p>
-                  <p>Their temperaments are: {temperament.length > 0 ? temperament : "N/A"}</p>  {/* si no hay temperamento, lo pongo en N/A */}
+                  {
+                    temperament ? (
+                      <p>Their temperaments are: {temperament}</p>
+                    ) : (
+                      <p>This dog has no temperament to show.</p>
+                    )
+                  }
                 </div>
               </div>
             </div>
