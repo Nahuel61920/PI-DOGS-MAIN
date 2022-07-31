@@ -7,6 +7,7 @@ html {
   /* 1rem = 10px */
   font-size: 62.5%;
   /* Color variables */
+  --btn: url(./assets/cachorro-de-poodle-animais-caes-1336395-removebg-preview.png);
   --primary-color: #32353c  ;
   --secondary-color: #e8e8e8;
   --button_color: linear-gradient(225deg, #181818, #32353c);
@@ -34,6 +35,7 @@ html {
 
 /* Color variables if the theme is dark */
 html[data-theme="dark"] {
+  --btn: url(./assets/cachorro-de-poodle-animais-caes-1674436-removebg-preview.png);
   --primary-color: #e8e8e8;
   --secondary-color: #07182E;
   --button_color: #e8e8e8;
@@ -64,6 +66,10 @@ html[data-theme="dark"] {
   --title_page: #000;
 }
 
+.switch{
+  cursor: pointer;
+  width: 100px;
+}
 
 body {
   margin: 0;

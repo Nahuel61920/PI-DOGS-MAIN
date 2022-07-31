@@ -36,10 +36,10 @@ function CardDogDetail() {
               <div className={styles.button_back}>
                     <Link to={`/home`}>
                         <button>
-                          <span class={styles.icon}>
+                          <span className={styles.icon}>
                             ⬅️
                           </span>
-                          <span class={styles.label}>Back</span>
+                          <span className={styles.label}>Back</span>
                         </button>
                     </Link>
                 </div>

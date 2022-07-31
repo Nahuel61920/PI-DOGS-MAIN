@@ -9,20 +9,22 @@ function Nav({setCurrentPage}) {
   return (
     <div className={styles.nav_container}>
         <nav className={styles.nav}>
-            <div className={styles.logo_container}>
-                <Link to={'/'}>
-                    <img src={logo} alt="logo" className={styles.logo} />
-                </Link>
-            </div>
-            <div>
-                <DarkMode/>
-            </div>
-            <div className={styles.create}>
-                <p>Favorites</p>
-                <Link to={'/create-dog'}>
-                    <button className={styles.create_button}>Create Dog</button>
-                </Link>
-                <p>Aboult</p>
+            <div className={styles.navbar}>
+                <div className={styles.logo_container}>
+                    <Link to={'/'}>
+                        <img src={logo} alt="logo" className={styles.logo} />
+                    </Link>
+                </div>
+                <div className={styles.create}>
+                    <p>Favorites</p>
+                    <Link to={'/create-dog'}>
+                        <button className={styles.create_button}>Create Dog</button>
+                    </Link>
+                    <p>Aboult</p>
+                </div>
+                <div className={styles.search}>
+                    <DarkMode/>
+                </div>
             </div>
             <div className={styles.searchBar}>
                 <SearchBar setCurrentPage={setCurrentPage}/>

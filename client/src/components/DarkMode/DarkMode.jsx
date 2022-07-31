@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import btnDark from "./../../assets/cachorro-de-poodle-animais-caes-1674436-removebg-preview.png";
+import btnLight from "./../../assets/cachorro-de-poodle-animais-caes-1336395-removebg-preview.png";
 
 
 function DarkMode() {
@@ -26,11 +27,7 @@ function DarkMode() {
     return (
         <div>
             <label>
-                <input
-                    type="checkbox"
-                    defaultChecked={checked}
-                    onChange={() => toggleThemeChange()}
-                />
+                    <img src={checked ? btnLight : btnDark} alt="btn" onClick={toggleThemeChange} className="switch" />
             </label>
         </div>
     )

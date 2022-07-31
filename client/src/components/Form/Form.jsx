@@ -18,26 +18,26 @@ const checkUndefined = (input) => {
 };
 
 const checkZero = (arr) => {
-    return arr.find((el) => Number(el) === 0);
+    return arr.find((el) => Number(el) === 0); // comprueba si es 0
 };
 
 const checkLimit = (arr, limit) => {
-  return arr.filter((el) => el > limit).length;
+  return arr.filter((el) => el > limit).length; // comprueba si es mayor que el limite
 };
 
 const checkNaN = (arr) => {
-  return arr.filter((el) => isNaN(Number(el))).length;
+  return arr.filter((el) => isNaN(Number(el))).length; // comprueba si es NaN
 };
 
 const checkMinMax = (min, max) => {
   const nMax = Number(max);
   const nMin = Number(min);
-  if (nMin > nMax || nMin === nMax) return false;
+  if (nMin > nMax || nMin === nMax) return false; // comprueba si es mayor al menor
   return true;
 };
 
 const checkNegatives = (arr) => {
-  return arr.filter((el) => Number(el) < 0).length;
+  return arr.filter((el) => Number(el) < 0).length; // comprueba si es negatives
 };
 
 const validate = (input) => {
@@ -67,6 +67,7 @@ const validate = (input) => {
   } else if (name.length < 4) {
     errors.name = "Name must be at least 4 characters";
   }
+  //c
   //check negatives
   if (checkNegatives(numbers)) {
     errors.negatives = "Negative numbers are not valid";
@@ -96,7 +97,7 @@ const validate = (input) => {
   if (checkLimit([life_spanMax, life_spanMin], 30)) {
     errors.tooOld = "The life span can't be more than 30 years";
     }
-  if (!regexUrl.test(image)) {
+  if (input.image && !regexUrl.test(image)) {
     errors.url = "Only jpg, jpeg, and png urls are allowed";
   }
 
@@ -190,10 +191,10 @@ function CharacterCreate() {
       <div className={stylesBack.button_back}>
           <Link to={`/home`}>
               <button>
-                <span class={stylesBack.icon}>
+                <span className={stylesBack.icon}>
                   ⬅️
                 </span>
-                <span class={stylesBack.label}>Back</span>
+                <span className={stylesBack.label}>Back</span>
               </button>
           </Link>
       </div>
@@ -240,7 +241,7 @@ function CharacterCreate() {
         </div>
       </div>
       <form onSubmit={handleSubmit} className={styles.formBox}>
-        <label htmlFor="nameInput">Name</label>
+        <label key="nameInput">Name</label>
         <input
           id="nameInput"
           type="text"
@@ -250,7 +251,7 @@ function CharacterCreate() {
         />
         {errors.name && <span className={styles.error}>{errors.name} </span>}
 
-        <label htmlFor="heightInput">Height</label>
+        <label key="heightInput">Height</label>
 
         <div className={styles.inputs}>
           <input
@@ -278,7 +279,7 @@ function CharacterCreate() {
           <span className={styles.error}>{errors.tooTall} </span>
         )}
 
-        <label htmlFor="weightInput">Weight</label>
+        <label key="weightInput">Weight</label>
         
         <div className={styles.inputs}>
           <input
@@ -306,7 +307,7 @@ function CharacterCreate() {
         {errors.tooHeavy && (
           <span className={styles.error}>{errors.tooHeavy} </span>
         )}
-        <label htmlFor="lifeInput">Life span</label>
+        <label key="lifeInput">Life span</label>
 
         <div className={styles.inputs}>
           <input
@@ -336,18 +337,18 @@ function CharacterCreate() {
           <span className={styles.error}>{errors.tooOld} </span>
         )}
         {errors.zero && <span className={styles.error}>{errors.zero} </span>}
-        <label htmlFor="imageInput">Image</label>
+        <label key="imageInput">Image</label>
 
         <input
           id="imageInput"
-          type="url"
+          type="text"
           value={input.image}
           name="image"
           onChange={handleChange}
           placeholder="Url "
         />
         {errors.url && <span className={styles.error}>{errors.url} </span>}
-        <label htmlFor="tempsInput">Temperaments</label>
+        <label key="tempsInput">Temperaments</label>
         <select id="tempsInput" onChange={handleSelect}>
           {!input.temperament.length ? (
             <option>Select Temperament</option>
