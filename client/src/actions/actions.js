@@ -19,37 +19,10 @@ export const getAllDogs = () => {
     return (dispatch) => {
         axios.get("/dogs") //trae todos los perros
         .then(response => {
-            const mapeo = response.data.map(dog => { //mapeo los datos de la api
-                    if(dog.weightMax && dog.weightMin) return dog;  //si el perro tiene peso 
-                    else{
-                        if(dog.name === "Smooth Fox Terrier"){ //si el perro no tiene peso
-                            return {
-                                ...dog,
-                                weightMin: 6,
-                                weightMax: 9, 
-                            } // 6-9 peso del Smooth Fox Terrier
-                        } else if(dog.name === "Olde English Bulldogge"){
-                            return {
-                                ...dog,
-                                weightMin: 20,
-                                weightMax: 30,
-                            } // 10-15 peso del Olde English Bulldogge
-                        }
-
-                        if(!dog.weightMax){ //si el perro no tiene peso maximo
-                            return {
-                                ...dog,
-                                weightMax: dog.weightMin + 2 // si el perro no tiene peso maximo le sumo uno
-                            }
-                        } else{ // si el perro no tiene peso minimo
-                            return {
-                                ...dog,
-                                weightMin: dog.weightMax - 2 // si el perro no tiene peso minimo le resto uno
-                            }
-                        }
-                    }
-            })
-            dispatch({type: GET_ALL_DOGS, payload: mapeo}) //dispatcheo el array de perros
+            dispatch({
+                type: GET_ALL_DOGS,
+                payload: response.data
+            });
         })
         .catch(err => new Error(err))
     }   

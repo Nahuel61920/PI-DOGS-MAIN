@@ -4,6 +4,7 @@ const { Router } = require('express');
 const axios=require("axios") //traemos axios para poderlo utilizar
 //const {API_KEY}= process.env
 const { Temperament, Dog }=require("../db");
+const { DataTypes } = require("sequelize");
 
 const { YOUR_API_KEY } = process.env;
 
@@ -18,20 +19,39 @@ const getApiInfo = async () => {  //funciones controladoras luego se llaman en l
     const apiUrl=  await axios.get(api); //trae la info de la api
     //console.log(apiUrl) 
     const apiInfo = await apiUrl.data.map(p => { 
-        const weightMin = parseInt(p.weight.metric.slice(0, 2).trim()); 
-        const weightMax = parseInt(p.weight.metric.slice(4).trim());
+        let weightMin = parseInt(p.weight.metric.slice(0, 2).trim()); 
+        let weightMax = parseInt(p.weight.metric.slice(4).trim());
         const heightMin = parseInt(p.height.metric.slice(0, 2).trim()); 
         const heightMax = parseInt(p.height.metric.slice(4).trim());
         const life_spanMin = parseInt(p.life_span.slice(0, 2).trim());
         const life_spanMax = parseInt(p.life_span.slice(4).trim()); 
+        
 
+    if (weightMin && weightMax) {
+        weightMin = weightMin;
+        weightMax = weightMax;
+    } else if (weightMin && !weightMax) {
+        weightMin = weightMin;
+        weightMax = `${weightMin+2}`;
+    } else if (!weightMin && weightMax) {
+        weightMin = `${weightMax-2}`;
+        weightMax = weightMax;
+    } else {
+        if (p.name === "Smooth Fox Terrier") {
+            weightMin = 6;
+            weightMax = 9;
+        } else {
+            weightMin = 20;
+            weightMax = 30;
+        }
+    }  
         return {
-            id:p.id,
-            name:p.name,
+            id: p.id,
+            name: p.name,
             heightMin:heightMin,
             heightMax:heightMax,
-            weightMin:weightMin,
-            weightMax:weightMax,
+            weightMin: weightMin,
+            weightMax: weightMax,
             life_spanMin:life_spanMin,
             life_spanMax:life_spanMax,
             temperament:p.temperament,

@@ -6,9 +6,7 @@
     width: 100%;
     height: 100vh;
     margin: 0;
-    background : url(../../assets/detail.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: var(--primary-color);
 }
 
 .button_back {
@@ -83,9 +81,9 @@
 .card {
     width: 800px;
     height: 90%;
-    border-radius: 10px;
-    background-color: #07182E;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background: var(--background_card);
+    border-radius: 12px;
+    box-shadow: var(--box_shadow_card);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -104,10 +102,11 @@
 
 .name {
     font-family: 'Dog';
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #fff;
+    color: var(--title_page);
     text-align: center;
+    margin-top: 1.5rem;
 }
 
 .image {
@@ -117,10 +116,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: var(--imagen_card);
 }
 
 .container__info {
     text-align: center;
-    color: #fff;
+    color: var(--color_card);
     line-height: 1;
 }
