@@ -10,14 +10,15 @@ import {
   filterTemperament,
   orderByName,
   orderByWeight,
-  filterCreated
+  filterCreated,
 } from "../../actions/actions";
 //importo los componentes que voy a usar
 import CardDogs from "../CardDogs/CardDogs";
 // Paginacion
 import Pagination from "./pagination.js";
 // Estilos del componente
-import loading from "../../assets/loading.gif";
+import logoLoading from "../../assets/loading.gif";
+import notRaza from "../../assets/not_raza.png";
 import styles from "./home.module.css";
 import Nav from "../Nav/Nav";
 
@@ -25,8 +26,13 @@ function Home() {
   const dispatch = useDispatch(); // useDispatch() para poder usar la action
   let { temperamen, dogsFilter } = useSelector((state) => state); // obtengo el estado actual del store
   const [order, setOrder] = useState(""); // guardo el orden en el que se muestran los perros
+  const [charge, setCharge] = useState(false); // variable para saber si esta cargando
 
   useEffect(() => {
+    setCharge(true);
+    setTimeout(() => {
+      setCharge(false);
+    }, 3000);
     dispatch(getAllDogs()); // llamo a la action que me interesa
     dispatch(getAllTemperament()); // llamo a la action que me interesa
   }, [dispatch]); // [] para que no se ejecute cada vez que se renderiza el componente
@@ -134,9 +140,11 @@ function Home() {
       />
 
       <div className={styles.cards}>
-        {!currentDogs.length > 0 ? (
-          <img src={loading} alt="loading" /> // si dogsFilter esta vacio muestro una imagen de cargando
-        ) : (
+          {charge ? (
+            <div>
+              <img src={logoLoading} alt="loading" />
+            </div>
+          ) : currentDogs.length ? (
           currentDogs.map((dog) => (
             <CardDogs
               key={dog.id}
@@ -148,6 +156,11 @@ function Home() {
               weightMax={dog.weightMax}
             />
           ))
+        ) : (
+          <div className={styles.noDogs}>
+            <h1>No dogs found</h1>
+            <img src={notRaza} alt="not_raza" />
+          </div>
         )}
       </div>
     </div>

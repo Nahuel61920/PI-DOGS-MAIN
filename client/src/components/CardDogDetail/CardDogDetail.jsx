@@ -44,8 +44,8 @@ function CardDogDetail() {
       idNext = dogDescription.id + 3;
     }
   } else {
-    idPrev = 1;
-    idNext = 1;
+    idPrev = - 1;
+    idNext = + 1;
   }
 
   // cambia la pagina

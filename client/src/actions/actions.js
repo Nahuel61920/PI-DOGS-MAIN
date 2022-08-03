@@ -7,7 +7,9 @@ import {
     FILTER_TEMPERAMENT,
     ORDER_BY_NAME,
     ORDER_BY_WEIGHT,
-    FILTER_CREATED
+    FILTER_CREATED,
+    SET_LOADING,
+    ERROR
 } from "../action-types/index";
 import axios from "axios";
 
@@ -24,19 +26,25 @@ export const getAllDogs = () => {
                 payload: response.data
             });
         })
-        .catch(err => new Error(err))
+        .catch(
+            error => {
+                dispatch({
+                    type: ERROR,
+                });
+            }
+        );
     }   
 }
 
-export function getDogs() {
-    return async function(dispatch) {
-        var json = await axios.get("/dogs");
-        return dispatch({
-            type: GET_ALL_DOGS,
-            payload: json.data
-        });
-    }
-}
+// export function getDogs() {
+//     return async function(dispatch) {
+//         var json = await axios.get("/dogs");
+//         return dispatch({
+//             type: GET_ALL_DOGS,
+//             payload: json.data
+//         });
+//     }
+// }
 
 export const getAllTemperament = () => {
     // Obtengo todos los temperamentos de mi back
@@ -59,10 +67,19 @@ export const getDescription = (id) => {
             })
         }
         catch(error) {
-            alert("Error al obtener la descripcion")
+            return dispatch ({
+                type: ERROR,
+            })
         }
     }
 }
+
+export function setLoading ()  {
+    return { type: SET_LOADING };
+};
+export function setError ()  {
+    return { type: ERROR };
+};
 
 export function getClean () {
     return{
@@ -73,9 +90,14 @@ export function getClean () {
 
 export const getDogsForName = (name) => {
     //obtener todos los perros que coincidan con el nombre que pasamos por parametro
-    return {
-        type: GET_DOGS_FOR_NAME,
-        payload: name
+    try {
+        return {
+            type: GET_DOGS_FOR_NAME,
+            payload: name
+        }
+    } catch (error) {
+        alert("Error al obtener la descripcion")
+        
     }
 }
 
@@ -114,8 +136,10 @@ export const postDog = (data) => {
         try {
             const res = await axios.post(`/dogs`, data);
             return res;
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            return dispatch ({
+                type: ERROR,
+            })
         }
     };
 };

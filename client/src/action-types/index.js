@@ -8,4 +8,6 @@ export const ORDER_BY_WEIGHT = "ORDER_BY_WEIGHT"; // order by weight
 export const FILTER_CREATED = "FILTER_CREATED"; // filter created
 export const GET_CLEAN = "GET_CLEAN"; // get clean
 export const POST_DOG = "POST_DOG" ; // post dogs
+export const SET_LOADING = "SET_LOADING" ; // loading
+export const ERROR = "ERROR"; // error
 

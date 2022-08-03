@@ -8,7 +8,9 @@ import {
     ORDER_BY_NAME,
     ORDER_BY_WEIGHT,
     FILTER_CREATED,
-    POST_DOG
+    POST_DOG,
+    SET_LOADING,
+    ERROR
 } 
 from "../action-types/index";
 
@@ -18,6 +20,8 @@ const initialState = {
     dogsFilter: [], // Array de perros filtrados
     temperamen: [],
     dogDescription: [],
+    loading: true,
+    error: false,
 }
 
 
@@ -31,7 +35,8 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state, // Obtengo el estado actual
                 allDogs: action.payload, // Obtengo el array de dogs
-                dogsFilter: arrayAux  // Guardo el array de dogs filtrados
+                dogsFilter: arrayAux,  // Guardo el array de dogs filtrados
+                loading: false,
             }
 
         case GET_ALL_TEMPERAMENT:
@@ -61,7 +66,8 @@ const rootReducer = (state = initialState, action) => {
             : state.allDogs.filter(dog => dog.name.toLowerCase().includes(action.payload.toLowerCase())) // Obtengo el array de dogs filtrados
             return{
                 ...state,
-                dogsFilter: arrayAux
+                dogsFilter: arrayAux,
+                loading: false,
             }
         
         case FILTER_TEMPERAMENT:
@@ -135,8 +141,21 @@ const rootReducer = (state = initialState, action) => {
                 dogsFilter: arrayAux
             }
         
-            case POST_DOG:
-                return { ...state };
+        case POST_DOG:
+            return { ...state };
+
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
+        
+        case ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: !state.error,
+            };
         default:
             return state; // Retorno el estado actual
     }

@@ -95,3 +95,8 @@
   gap: 20px;
 }
 
+.noDogs{
+  color: var(--secondary-color);
+  text-align: center;
+}
+

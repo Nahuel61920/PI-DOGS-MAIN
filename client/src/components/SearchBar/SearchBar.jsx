@@ -25,17 +25,17 @@ function SearchBar({setCurrentPage}) {
 
     return (
         <form className={styles.group}>
-                <SearchSvg/>
-                <input
-                    className={styles.input} 
-                    type="text"
-                    placeholder="Search Dog..."
-                    onChange= { (e) => {
-                    setName(e.target.value); 
-                    handleInputChange(e.target.value)
-                    }} 
-                    value={name}
-                />
+            <SearchSvg/>
+            <input
+                className={styles.input} 
+                type="text"
+                placeholder="Search Dog..."
+                onChange= { (e) => {
+                setName(e.target.value); 
+                handleInputChange(e.target.value)
+                }} 
+                value={name}
+            />
         </form>
     )
 }

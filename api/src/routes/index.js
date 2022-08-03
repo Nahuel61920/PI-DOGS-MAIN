@@ -26,7 +26,7 @@ const getApiInfo = async () => {  //funciones controladoras luego se llaman en l
         const life_spanMin = parseInt(p.life_span.slice(0, 2).trim());
         const life_spanMax = parseInt(p.life_span.slice(4).trim()); 
         
-
+        
     if (weightMin && weightMax) {
         weightMin = weightMin;
         weightMax = weightMax;
