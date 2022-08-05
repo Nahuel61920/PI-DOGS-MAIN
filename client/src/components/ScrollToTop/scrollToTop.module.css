@@ -1,0 +1,18 @@
+.scroll_top {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 1px solid var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.scroll_top img {
+    height: 30px;
+    width: 30px;
+}

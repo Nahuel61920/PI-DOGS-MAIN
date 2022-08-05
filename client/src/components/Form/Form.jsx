@@ -97,7 +97,7 @@ const validate = (input) => {
   if (checkLimit([life_spanMax, life_spanMin], 30)) {
     errors.tooOld = "The life span can't be more than 30 years";
     }
-  if (input.image && !regexUrl.test(image)) {
+  if (input.image && !regexUrl.test(image)) { // test
     errors.url = "Only jpg, jpeg, and png urls are allowed";
   }
 
@@ -349,7 +349,7 @@ function CharacterCreate() {
         />
         {errors.url && <span className={styles.error}>{errors.url} </span>}
         <label key="tempsInput">Temperaments</label>
-        <select id="tempsInput" onChange={handleSelect}>
+        <select className={styles.select} id="tempsInput" onChange={handleSelect}>
           {!input.temperament.length ? (
             <option>Select Temperament</option>
           ) : (

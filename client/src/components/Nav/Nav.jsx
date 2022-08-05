@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../../assets/6Troy4q7c.png";
 import styles from "./nav.module.css";
+import './searchNav.css'
 import SearchBar from "../SearchBar/SearchBar";
 import DarkMode from '../DarkMode/DarkMode';
 
 function Nav({setCurrentPage}) {
+    const [ open , setOpen ] = useState(false);
+
   return (
     <div className={styles.nav_container}>
         <nav className={styles.nav}>
@@ -16,7 +19,9 @@ function Nav({setCurrentPage}) {
                     </Link>
                 </div>
                 <div className={styles.create}>
-                    <p>Favorites</p>
+                    <Link to={'/wallpaper'} style={{ textDecoration: 'none' }}>
+                        <p>Wallpapers</p>
+                    </Link>
                     <Link to={'/create-dog'}>
                         <button className={styles.create_button}>Create Dog</button>
                     </Link>
@@ -25,8 +30,13 @@ function Nav({setCurrentPage}) {
                 <div className={styles.search}>
                     <DarkMode/>
                 </div>
+                <div className={styles.lupa} onClick={ () => setOpen(!open)}>
+                    🔎
+                </div>
+
+
             </div>
-            <div className={styles.searchBar}>
+            <div className={ open ? "searchBarOpen" : "searchBarClosed" }>
                 <SearchBar setCurrentPage={setCurrentPage}/>
             </div>
         </nav>

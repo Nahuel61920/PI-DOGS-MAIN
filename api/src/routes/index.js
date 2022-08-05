@@ -4,7 +4,6 @@ const { Router } = require('express');
 const axios=require("axios") //traemos axios para poderlo utilizar
 //const {API_KEY}= process.env
 const { Temperament, Dog }=require("../db");
-const { DataTypes } = require("sequelize");
 
 const { YOUR_API_KEY } = process.env;
 

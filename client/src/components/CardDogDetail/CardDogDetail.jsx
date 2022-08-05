@@ -3,24 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import PrevSvg from "../SVG/PrevSvg";
 import NextSvg from "../SVG/NextSvg";
+import Error404 from "../Error404/Error404";
 
 import styles from "./cardDogDetail.module.css";
 
 // Modulos internos
-import { getDescription, getClean } from "../../actions/actions";
+import { getDescription, getClean, setLoading  } from "../../actions/actions";
 
-import loading from "../../assets/loading.gif";
+
 
 function CardDogDetail() {
 
   
-  const { dogDescription } = useSelector((state) => state);
+  const { dogDescription, loading, error } = useSelector((state) => state);
   console.log(dogDescription);
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getDescription(id));
+    dispatch(setLoading());
     return () => {
       dispatch(getClean()); // limpia el state
     }
@@ -29,29 +31,19 @@ function CardDogDetail() {
   const { name, weightMin, weightMax, heightMin, heightMax, life_spanMax, life_spanMin, image, temperament } = dogDescription;
 
   // encontrar si el id existe 
-  let idExist = dogDescription.id ? true : false;
+  // convierto de string a number
+  const idNumber = parseInt(id);
 
-  let idPrev = dogDescription.id - 1;
-  let idNext = dogDescription.id + 1;
+  let idPrev = idNumber - 1;
+  let idNext = idNumber + 1;
   // avanzar y retroceder
-  if (idExist) {
-    let id = dogDescription.id;
-    if (id === 1) {
-      idPrev = dogDescription.id; 
-    } else if (id === 19 || id === 26 || id === 34 || id === 36 || id === 43 || id === 45 || id === 48 || id === 51 || id === 59 || id === 62 || id === 65){ 
-      idNext = dogDescription.id + 2;
-    } else if (id === 38 || id === 22 || id === 23 || id === 24 || id === 25 || id === 27 || id === 28 || id === 29 || id === 30 || id === 31 || id === 32 || id === 33 || id === 35 || id === 37) {
-      idNext = dogDescription.id + 3;
-    }
+  if (idPrev < 1) {
+    idPrev = 1;
+  } else if (idNext > 264) {
+    idNext = 1;
   } else {
-    idPrev = - 1;
-    idNext = + 1;
-  }
-
-  // cambia la pagina
-
-  const changePage = (id) => {
-    dispatch(getDescription(id));
+    idPrev = idPrev;
+    idNext = idNext;
   }
 
   return (
@@ -63,7 +55,9 @@ function CardDogDetail() {
         <NextSvg />
       </Link>
         {
-          Object.keys(dogDescription).length > 0 ? ( // si hay datos en el state entra
+          error ? (<Error404 />) : loading ? (
+            <img src="https://i.giphy.com/media/ar8zpFnzWcSbAxjJmd/giphy.webp" alt="loading" />
+          ) : ( // si hay datos en el state entra
             <div className={styles.card}>
               <div className={styles.card_container}>
               <div className={styles.button_back}>
@@ -97,8 +91,6 @@ function CardDogDetail() {
                 </div>
               </div>
             </div>
-          ) : (
-            <img src={loading} alt="loading" />
           )
         }
       

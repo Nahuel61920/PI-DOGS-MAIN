@@ -28,8 +28,9 @@
     height: 3em;
     padding: 0 2em;
     border: none;
-    background-color: #114a94;
-    color: #fff;
+    background-color: var(--background_card);
+    color: var(--secondary-color);
+    box-shadow: var(--box_shadow_create);
     text-transform: uppercase;
     overflow: hidden;
     border-radius: 5px;
@@ -45,8 +46,8 @@
     left: 0;
     height: 0px;
     width: 100%;
-    background: #114a94;
-    background: linear-gradient(90deg, rgb(17, 5, 66) 20%, #114a94 100%);
+    background: var(--primary-color);
+    background: linear-gradient(to top, var(--primary-color) 0%, var(--background_card) 100%);
     transition: 0.2s;
 }
 

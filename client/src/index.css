@@ -31,6 +31,10 @@ html {
   --imagen_card: -4px -4px 4px rgba(255, 255, 255, 0.08), 4px 4px 4px rgba(0, 0, 0, 0.56), 0 0 0 rgba(255, 255, 255, 0.08) inset, 0 0 0 rgba(0, 0, 0, 0.56) inset;
   --select_focus: rgb(0, 183, 255);
   --title_page: #f2f8ff;
+  --background_forn: #32353c;
+  --box_shadow_forn: -4px -4px 4px rgba(255, 255, 255, 0.08), 4px 4px 4px rgba(0, 0, 0, 0.56), 0 0 0 rgba(255, 255, 255, 0.08) inset, 0 0 0 rgba(0, 0, 0, 0.56) inset;
+  --background_input: #141414;
+  text-decoration: none;
 }
 
 /* Color variables if the theme is dark */
@@ -64,6 +68,9 @@ html[data-theme="dark"] {
   --imagen_card: -5px -5px 8px #ffffff7a, 5px 5px 8px #a9a9aa7a;
   --select_focus: rgb(15, 19, 54);
   --title_page: #000;
+  --background_forn: rgb(241, 241, 241);
+  --box_shadow_forn: 0 8px 32px #00000080;
+  --background_input: #fff;
 }
 
 .switch{

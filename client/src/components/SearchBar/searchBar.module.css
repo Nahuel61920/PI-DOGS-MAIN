@@ -18,7 +18,7 @@
    box-shadow: var(--box_shadow_search);
    font-size: medium;
    font-weight: bold;
-   color: #0d0c22;
+   color: var(--secondary-color);
 }
    
 .input::placeholder {

@@ -79,6 +79,8 @@
   padding: 1rem;
   border-radius: 1rem;
   border: 1px solid #fff;
+  background-color: var(--background_input);
+  color: var(--secondary-color);
 }
 
 .inputs input {
@@ -88,20 +90,16 @@
 .formBox {
   text-align: center;
   width: 40%;
-  height: fit-content;
   margin: 20px;
   padding: 2rem;
   height: 580px;
-  font-family: "Poppins", sans-serif;
-  background: rgb(241, 241, 241);
-  box-shadow: 0 8px 32px #00000080;
+  background: var(--background_forn);
+  box-shadow: var(--box_shadow_forn);
   border-radius: 0.6rem;
-  backdrop-filter: blur(5px);
-  cursor: pointer;
   color: var(--secondary-color);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   gap: 1rem;
   cursor: pointer;
 }
@@ -113,7 +111,25 @@
 }
 
 .error {
-  color: #63222a;
+  background: #dd152c;
+  color: #fff;
+  width: 60%;
+  border-radius: 10px;
+  padding: .2rem;
+  margin: 0 auto;
+}
+
+.select {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--background_search);
+  box-shadow: var(--box_shadow_create);
+  color: var(--secondary-color);
+}
+
+.select:focus {
+  color: var(--select_focus);
 }
 
 .btn {

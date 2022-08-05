@@ -49,7 +49,9 @@ const rootReducer = (state = initialState, action) => {
             // obtener la descripcion de cada raza seleccionada
             return{
                 ...state,
-                dogDescription: action.payload// Obtengo el perro seleccionado
+                dogDescription: action.payload,// Obtengo el perro seleccionado
+                loading: false,
+                error: false,
             }
 
         case GET_CLEAN:

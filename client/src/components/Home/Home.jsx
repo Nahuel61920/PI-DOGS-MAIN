@@ -17,10 +17,12 @@ import CardDogs from "../CardDogs/CardDogs";
 // Paginacion
 import Pagination from "./pagination.js";
 // Estilos del componente
-import logoLoading from "../../assets/loading.gif";
+
 import notRaza from "../../assets/not_raza.png";
 import styles from "./home.module.css";
 import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
 
 function Home() {
   const dispatch = useDispatch(); // useDispatch() para poder usar la action
@@ -77,6 +79,7 @@ function Home() {
   return (
     <div className={styles.container}>
       <Nav setCurrentPage={setCurrentPage}/>
+      <ScrollToTop/>
       <div className={styles.title}>
         <div className={styles.title__text}>
           <h1>PI Dogs</h1>
@@ -85,18 +88,15 @@ function Home() {
 
 
       <div className={styles.filter}>
-        <select className={styles.select} onChange={(e) => handleSort(e)}>
-          <option value="" disabled selected>
+        <select defaultValue="ALP" className={styles.select} onChange={(e) => handleSort(e)}>
+          <option value="ALP" disabled selected>
             Alphabetical order
           </option>
           <option value="asc">A-Z</option>
           <option value="des">Z-A</option>
         </select>
-        <select
-          className={styles.select}
-          onChange={(e) => handleFilterByTemperament(e)} // llamo a la action que me interesa
-        >
-          <option value="" disabled selected>
+        <select defaultValue="TEMP" className={styles.select} onChange={(e) => handleFilterByTemperament(e)} >
+          <option value="TEMP" disabled selected>
             Filter by temperament
           </option>
           <option value="all">All</option>
@@ -112,19 +112,16 @@ function Home() {
         </select>
       </div>
       <div className={styles.filter}>
-        <select className={styles.select} onChange={(e) => handleFilterByCreated(e)}>
-          <option value="" disabled selected> 
+        <select defaultValue="CREATED" className={styles.select} onChange={(e) => handleFilterByCreated(e)}>
+          <option value="CREATED" disabled selected> 
             Filter by create
           </option>
           <option value="all">All</option>
           <option value="api">API</option>
           <option value="db">DB</option>
         </select>
-        <select
-          className={styles.select}
-          onChange={(e) => handleSortWeight(e)} // llamo a la action que me interesa
-        >
-          <option value="" disabled selected>
+        <select defaultValue="WEIGHT" className={styles.select} onChange={(e) => handleSortWeight(e)}>
+          <option value="WEIGHT" disabled selected>
             Order by weight
           </option>
           <option value="min">Weight Min</option>
@@ -142,7 +139,7 @@ function Home() {
       <div className={styles.cards}>
           {charge ? (
             <div>
-              <img src={logoLoading} alt="loading" />
+              <img src="https://i.giphy.com/media/ar8zpFnzWcSbAxjJmd/giphy.webp" alt="loading" />
             </div>
           ) : currentDogs.length ? (
           currentDogs.map((dog) => (
@@ -163,7 +160,9 @@ function Home() {
           </div>
         )}
       </div>
+      <Footer/>
     </div>
+    
   );
 }
 

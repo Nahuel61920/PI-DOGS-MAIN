@@ -24,7 +24,7 @@ function SearchBar({setCurrentPage}) {
 
 
     return (
-        <form className={styles.group}>
+        <div className={styles.group}>
             <SearchSvg/>
             <input
                 className={styles.input} 
@@ -36,7 +36,7 @@ function SearchBar({setCurrentPage}) {
                 }} 
                 value={name}
             />
-        </form>
+        </div>
     )
 }
 

@@ -3,8 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from './components/LandingPage/LandingPage';
 import Home from './components/Home/Home';
 import CardDogDetail from './components/CardDogDetail/CardDogDetail';
-import Error404 from './components/Error404/Error404';
+import NotFound404 from './components/Error404/NotFound404';
 import CreateDog from './components/CreateDog/CreateDog';
+import Wallpaper from './components/Wallpaper/Wallpaper';
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
         <Route exact path="/" element={<LandingPage />} />
         <Route exact path="/home" element={<Home />} />
         <Route exact path='/home/:id' element={<CardDogDetail />} />
-        <Route path='/create-dog' element={<CreateDog />} />
-        <Route path="*" element={<Error404 />} />
+        <Route exact path='/create-dog' element={<CreateDog />} />
+        <Route exact path='/wallpaper' element={<Wallpaper />} />
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
   );
 }
