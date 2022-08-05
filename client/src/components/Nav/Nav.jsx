@@ -25,7 +25,7 @@ function Nav({setCurrentPage}) {
                     <Link to={'/create-dog'}>
                         <button className={styles.create_button}>Create Dog</button>
                     </Link>
-                    <p>Aboult</p>
+                    <p>About</p>
                 </div>
                 <div className={styles.search}>
                     <DarkMode/>
