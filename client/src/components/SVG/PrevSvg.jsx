@@ -2,7 +2,7 @@ import * as React from "react";
 import './next_prev.css';
 
 const PrevSvg = (props) => (
-    <div className=" btn-slide btn-pag prev">
+    <div className=" btn-slide prev">
         <svg
         width={38}
         height={37}

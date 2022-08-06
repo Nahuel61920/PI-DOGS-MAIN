@@ -37,13 +37,13 @@
     pointer-events: none;
 }
 .prev {
-    top: 50%;
+    top: 40%;
     left: 20px;
     transform: translateY(-60%);
     
 }
 .next {
-    top: 50%;
+    top: 40%;
     right: 20px;
     transform: translateY(-60%);
 }
