@@ -1,5 +1,8 @@
 import React from 'react';
+import PrevPag from '../SVG/PrevPag';
+import NextPag from '../SVG/NextPag';
 import styles from './home.module.css';
+import "./pagination.css" 
 
 
 export default function Pagination({dogsPerPage, currentPage, allDogs, paginado}) {
@@ -11,12 +14,22 @@ export default function Pagination({dogsPerPage, currentPage, allDogs, paginado}
     return(
     
         <ul className={styles.paginated}>
-            {pageNumbers && 
-            pageNumbers.map(number=> ( //map para recorrer el array
-                <li className={currentPage === number ? styles.active : ''} key={number} onClick={()=>paginado(number)}> {/* si el numero de pagina es igual al currentPage, le pongo la clase active */}
-                    <p className= {styles.current} >{number}</p> {/* muestro el numero de pagina */}
+            <button className={ currentPage === 1 ? "disabled" : "enabled" } disabled={currentPage === 1 ? true : false} onClick={() => paginado(currentPage - 1)}>
+                <PrevPag />
+            </button>
+                <li className={styles.activeMQ}>
+                    <p className= {styles.current}>{currentPage}</p>
                 </li>
-            ))}
+                {pageNumbers && 
+                    pageNumbers.map(number=> ( //map para recorrer el array
+                        <li className={currentPage === number ? styles.active : ''} key={number} onClick={()=>paginado(number)}> {/* si el numero de pagina es igual al currentPage, le pongo la clase active */}
+                            <p className= {styles.current} >{number}</p> {/* muestro el numero de pagina */}
+                        </li>
+                    ))
+                }
+            <button className={ currentPage === pageNumbers.length ? "disabled" : "enabled" } disabled={currentPage === pageNumbers.length ? true : false} onClick={() => paginado(currentPage + 1)}>
+                <NextPag />
+            </button>
         </ul>
 
     )

@@ -1,4 +1,4 @@
-.searchBarClosed{
+.serchBar{
     display: none;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,6 @@
     position: relative;
     z-index: 10;
     width: 100%;
-    
 }
 
 .searchBarOpen{
@@ -23,5 +22,4 @@
     position: relative;
     z-index: 10;
     width: 100%;
-    transition: 2s;
 }

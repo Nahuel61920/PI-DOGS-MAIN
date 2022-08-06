@@ -77,10 +77,24 @@
   color: rgb(0, 183, 255);
 }
 
+.paginated .activeMQ {
+  box-shadow: var(--box_shadow_paginated_active);
+  border: var(--border_paginated);
+  background: var(--background_paginated_active);
+  color: rgb(0, 183, 255);
+  display: none;
+}
+
 
 .paginated p {
   font-size: 1.3rem;
   font-weight: bold;
+}
+
+.paginated button{
+  background-color: transparent;
+  border: none;
+  display: none;
 }
 
 
@@ -100,3 +114,17 @@
   text-align: center;
 }
 
+
+@media (max-width: 700px){
+  .paginated li {
+    display: none;
+  }
+  
+  .paginated .activeMQ {
+    display: flex;
+  }
+
+  .paginated button{
+    display: block;
+  }
+}

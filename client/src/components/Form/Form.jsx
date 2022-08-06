@@ -66,8 +66,10 @@ const validate = (input) => {
     errors.name = "Invalid name format";
   } else if (name.length < 4) {
     errors.name = "Name must be at least 4 characters";
+  } else if (name[0] !== name[0].toUpperCase()) {
+    errors.name = "Name must start with an uppercase letter";
   }
-  //c
+
   //check negatives
   if (checkNegatives(numbers)) {
     errors.negatives = "Negative numbers are not valid";

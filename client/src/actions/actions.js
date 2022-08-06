@@ -4,6 +4,7 @@ import {
     GET_DESCRIPTION,
     GET_CLEAN,
     GET_DOGS_FOR_NAME,
+    DELETE_DOG,
     FILTER_TEMPERAMENT,
     ORDER_BY_NAME,
     ORDER_BY_WEIGHT,
@@ -74,6 +75,50 @@ export const getDescription = (id) => {
     }
 }
 
+export const getDogsForName = (name) => {
+    //obtener todos los perros que coincidan con el nombre que pasamos por parametro
+    try {
+        return {
+            type: GET_DOGS_FOR_NAME,
+            payload: name
+        }
+    } catch (error) {
+        alert("Error al obtener la descripcion")
+        
+    }
+}
+
+export const postDog = (data) => {
+    return async function (dispatch) {
+        try {
+            const res = await axios.post(`/dogs`, data);
+            return res;
+        } catch (error) {
+            return dispatch ({
+                type: ERROR,
+            })
+        }
+    };
+};
+
+export const deleteDog = (id) => {
+    return async function (dispatch) {
+        try {
+            await axios.delete(`/deleted/${id}`);
+            return dispatch({
+                type: DELETE_DOG,
+        });
+        } catch (e) {
+            return dispatch({
+                type: ERROR,
+        });
+        }
+    };
+};
+
+// Utils
+
+
 export function setLoading ()  {
     return { type: SET_LOADING };
 };
@@ -85,19 +130,6 @@ export function getClean () {
     return{
         type: GET_CLEAN,
         payload: []
-    }
-}
-
-export const getDogsForName = (name) => {
-    //obtener todos los perros que coincidan con el nombre que pasamos por parametro
-    try {
-        return {
-            type: GET_DOGS_FOR_NAME,
-            payload: name
-        }
-    } catch (error) {
-        alert("Error al obtener la descripcion")
-        
     }
 }
 
@@ -131,15 +163,3 @@ export function filterCreated(payload){
     }
 }
 
-export const postDog = (data) => {
-    return async function (dispatch) {
-        try {
-            const res = await axios.post(`/dogs`, data);
-            return res;
-        } catch (error) {
-            return dispatch ({
-                type: ERROR,
-            })
-        }
-    };
-};

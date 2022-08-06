@@ -199,4 +199,19 @@ router.get("/dogs/:id", async(req, res, next)=>{
     }
 }) 
 
+router.delete('/deleted/:id', async (req, res, next) => {
+    const {id} = req.params;
+    try {
+        const dog = await Dog.findByPk(id);
+        if(!dog){
+            res.status(404).send("No esta disponible");
+        } else {
+            await dog.destroy();
+            res.status(200).send("Perro eliminado");
+        }
+    } catch (error) {
+        next(error);
+    }
+})
+
 module.exports = router;

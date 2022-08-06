@@ -1,24 +1,30 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate  } from "react-router-dom";
 import PrevSvg from "../SVG/PrevSvg";
 import NextSvg from "../SVG/NextSvg";
+import Remove from "../SVG/Remove";
 import Error404 from "../Error404/Error404";
 
 import styles from "./cardDogDetail.module.css";
 
 // Modulos internos
-import { getDescription, getClean, setLoading  } from "../../actions/actions";
+import { getDescription, getClean, setLoading, deleteDog  } from "../../actions/actions";
 
 
 
 function CardDogDetail() {
-
-  
   const { dogDescription, loading, error } = useSelector((state) => state);
   console.log(dogDescription);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate = useNavigate(); // useNavigate es un hook que me permite navegar entre paginas
+
+  const handleDelete = () => {
+    dispatch(deleteDog(id));
+    alert("Dog deleted succesfully");
+    navigate("/home");
+  };
 
   useEffect(() => {
     dispatch(getDescription(id));
@@ -28,7 +34,7 @@ function CardDogDetail() {
     }
   }, [dispatch, id]);
 
-  const { name, weightMin, weightMax, heightMin, heightMax, life_spanMax, life_spanMin, image, temperament } = dogDescription;
+  const { name, weightMin, weightMax, heightMin, heightMax, life_spanMax, life_spanMin, image, temperament, createdInBd } = dogDescription;
 
   // encontrar si el id existe 
   // convierto de string a number
@@ -70,7 +76,17 @@ function CardDogDetail() {
                         </button>
                     </Link>
                 </div>
-
+                {
+                  createdInBd ? (
+                    <div className={styles.button_delete}>
+                        <button onClick={handleDelete}>
+                          <Remove/>
+                        </button>
+                    </div>
+                  ) : (
+                    null
+                  )
+                }
                 <div className={styles.name}>
                   <h1>{name}</h1>
                 </div>

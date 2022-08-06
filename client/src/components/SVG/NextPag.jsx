@@ -3,7 +3,7 @@ import './next_prev.css';
 
 
 const NextSvg = (props) => (
-    <div className=" btn-slide next">
+    <div className="btn-pag next">
         <svg
         width={38}
         height={37}

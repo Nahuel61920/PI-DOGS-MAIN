@@ -1,0 +1,38 @@
+.btn-pag {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev {
+    transform: translateY(0);
+    margin: 2rem;
+}
+.next {
+    transform: translateY(0);
+    margin: 2rem;
+}
+
+.disabled svg {
+    cursor: not-allowed;
+}
+
+.disabled svg:hover polygon, 
+.disabled svg:hover path {
+    fill: rgb(255, 255, 255);
+    animation: none;
+}
+
+.disabled svg:hover .arrow {
+    animation: none;
+}
+.disabled svg:hover .arrow-fixed {
+    animation: none;
+}
+
+.disabled svg:hover .arrow-2 {
+    animation: none;
+}

@@ -10,4 +10,5 @@ export const GET_CLEAN = "GET_CLEAN"; // get clean
 export const POST_DOG = "POST_DOG" ; // post dogs
 export const SET_LOADING = "SET_LOADING" ; // loading
 export const ERROR = "ERROR"; // error
+export const DELETE_DOG = "DELETE_DOG"; // delete dog
 

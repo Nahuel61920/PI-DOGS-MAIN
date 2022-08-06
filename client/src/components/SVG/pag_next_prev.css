@@ -3,7 +3,7 @@
     height: auto;
     margin: 0 2rem;
     cursor: pointer;
-    overflow: visible;
+    overflow: hidden;
 }
 .svg-arrow polygon, .svg-arrow path {
     transition: all 0.5s cubic-bezier(.2,1,.3,1);

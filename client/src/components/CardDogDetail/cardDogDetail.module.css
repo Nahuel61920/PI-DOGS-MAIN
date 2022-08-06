@@ -77,7 +77,28 @@
     opacity: 1;
 }
 
+.button_delete{
+    position: absolute;
+    top: 2px;
+    right: 0;
+    margin: 0.7rem;
+    border-radius: 10px;
+    padding: 2px 6px;
+    background-color: var(--background_card);
+    box-shadow: var(--box_shadow_create);
+    cursor: pointer;
+}
 
+.button_delete button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.button_delete:active {
+    background: var(--background_create);
+    box-shadow: var(--box_shadow_create_active);
+}
 
 .card {
     width: 800px;

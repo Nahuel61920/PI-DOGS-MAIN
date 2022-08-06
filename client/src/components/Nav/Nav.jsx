@@ -5,6 +5,7 @@ import styles from "./nav.module.css";
 import './searchNav.css'
 import SearchBar from "../SearchBar/SearchBar";
 import DarkMode from '../DarkMode/DarkMode';
+import SearchSvg2 from '../SVG/searchSvg2';
 
 function Nav({setCurrentPage}) {
     const [ open , setOpen ] = useState(false);
@@ -31,12 +32,12 @@ function Nav({setCurrentPage}) {
                     <DarkMode/>
                 </div>
                 <div className={styles.lupa} onClick={ () => setOpen(!open)}>
-                    🔎
+                    <SearchSvg2/>
                 </div>
 
 
             </div>
-            <div className={ open ? "searchBarOpen" : "searchBarClosed" }>
+            <div className={ open ? "searchBarOpen" : "serchBar" }>
                 <SearchBar setCurrentPage={setCurrentPage}/>
             </div>
         </nav>

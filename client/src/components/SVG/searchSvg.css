@@ -1,8 +1,15 @@
 .icon-2 {
     position: absolute;
     left: 1rem;
-    fill: rgb(48, 45, 45);
+    fill: var(--secondary-color);
     width: 2rem;
     height: 2rem;
+}
+
+.icon-3 {
+    position: absolute;
+    fill: var(--secondary-color);
+    width: 2.4rem;
+    height: 2.4rem;
 }
 
