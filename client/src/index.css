@@ -34,7 +34,7 @@ html {
   --background_forn: #32353c;
   --box_shadow_forn: -4px -4px 4px rgba(255, 255, 255, 0.08), 4px 4px 4px rgba(0, 0, 0, 0.56), 0 0 0 rgba(255, 255, 255, 0.08) inset, 0 0 0 rgba(0, 0, 0, 0.56) inset;
   --background_input: #141414;
-  text-decoration: none;
+  --background_menu: #222;
 }
 
 /* Color variables if the theme is dark */
@@ -71,6 +71,7 @@ html[data-theme="dark"] {
   --background_forn: rgb(241, 241, 241);
   --box_shadow_forn: 0 8px 32px #00000080;
   --background_input: #fff;
+  --background_menu: rgb(241, 241, 241);
 }
 
 .switch{
@@ -92,4 +93,18 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 60.5%;
+  }
+
+  body {
+    font-size: 1.3rem;
+  }
+
+  .switch {
+    width: 60px;
+  }
 }

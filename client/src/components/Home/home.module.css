@@ -10,7 +10,7 @@
 
 .title {
     align-items: center;
-    margin-top: 10rem;
+    margin-top: 4rem;
 }
 
 .title__text {
@@ -27,7 +27,7 @@
 }
 
 .select {
-  width: 200PX;
+  width: 200px;
   height: 40px;
   line-height: 28px;
   padding: 0 1rem;
@@ -39,6 +39,8 @@
   color: var(--secondary-color);
   margin-bottom: 3rem;
 }
+
+
 
 .select:focus {
   color: var(--select_focus);
@@ -115,7 +117,23 @@
 }
 
 
-@media (max-width: 700px){
+@media (max-width: 768px){
+  .title {
+    margin-top: 4rem;
+  }
+
+  .title__text {
+    margin: 0;
+  }
+
+  .filter{
+    gap: 4rem;
+  }
+
+  .select{
+    width: 150px;
+  }
+
   .paginated li {
     display: none;
   }

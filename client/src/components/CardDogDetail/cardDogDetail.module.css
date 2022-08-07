@@ -146,3 +146,31 @@
     color: var(--color_card);
     line-height: 1;
 }
+
+@media (max-width: 1000px) {
+    .card {
+        width: 600px;
+        height: 87%;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 500px;
+    }
+}
+
+@media (max-width: 640px) {
+    .card {
+        width: 80%;
+        height: 80%;
+    }
+
+    .name {
+        font-size: 2rem;
+    }
+
+    .image {
+        height: 200px;
+    }
+}

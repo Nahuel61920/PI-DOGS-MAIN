@@ -74,3 +74,15 @@
     color: var(--color_card);
     margin: .6rem;
 }
+
+@media (max-width: 768px) {
+    .card{
+        width: 30rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .card {
+        width: 27rem;
+    }
+}

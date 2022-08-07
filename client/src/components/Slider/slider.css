@@ -67,3 +67,14 @@
 .dot.active {
     background: rgb(32, 32, 32);
 }
+
+@media (max-width: 640px) {
+    .prev {
+        top: 40%;
+        left: -15px;
+    }
+    .next {
+        top: 40%;
+        right: -15px;
+    }
+}

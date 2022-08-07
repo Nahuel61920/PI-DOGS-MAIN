@@ -155,16 +155,34 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 1370px) {
+  .formBox {
+    width: 50%;
+  }
+
+  .inputs input {
+    width: 43%;
+  }
+}
 
 @media (max-width: 1000px){
   .container{
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
   }
+  .inputs input {
+    width: 44%;
+  }
   .formBox{
-    width: 100vw;
     margin: 25px 0;
     border-radius: 0;
+    width: 90%;
+  }
+}
+
+@media (max-width: 640px) {
+  .inputs input {
+    width: 41%;
   }
 }
