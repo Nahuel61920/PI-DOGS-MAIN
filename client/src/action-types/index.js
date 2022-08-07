@@ -11,4 +11,6 @@ export const POST_DOG = "POST_DOG" ; // post dogs
 export const SET_LOADING = "SET_LOADING" ; // loading
 export const ERROR = "ERROR"; // error
 export const DELETE_DOG = "DELETE_DOG"; // delete dog
+export const ADD_FAV = "ADD_FAV"; // add fav
+export const DELETE_FAV = "DELETE_FAV"; // delete fav
 

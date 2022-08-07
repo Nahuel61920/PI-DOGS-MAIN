@@ -5,6 +5,8 @@ import {
     GET_CLEAN,
     GET_DOGS_FOR_NAME,
     DELETE_DOG,
+    ADD_FAV,
+    DELETE_FAV,
     FILTER_TEMPERAMENT,
     ORDER_BY_NAME,
     ORDER_BY_WEIGHT,
@@ -114,6 +116,14 @@ export const deleteDog = (id) => {
         });
         }
     };
+};
+
+export const addFav = (payload) => {
+    return { type: ADD_FAV, payload };
+};
+
+export const deleteFav = (id) => {
+    return { type: DELETE_FAV, payload: id };
 };
 
 // Utils

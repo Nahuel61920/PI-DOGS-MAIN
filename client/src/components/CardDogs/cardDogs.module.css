@@ -75,6 +75,54 @@
     margin: .6rem;
 }
 
+
+.favContainer{
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 500px;
+    z-index: 1;
+    gap: 2rem;
+    flex-wrap: wrap;
+    background: var(--primary-color);
+}
+
+.favError{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-color);
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+.fav,
+.favActive {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0.7rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url("../../assets/corazon.svg");
+}
+
+@supports (filter: invert(100%)) {
+  .favActive {
+    filter: invert(20%) sepia(100%) saturate(4000%);
+  }
+}
+
 @media (max-width: 768px) {
     .card{
         width: 30rem;

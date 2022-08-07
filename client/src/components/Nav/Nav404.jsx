@@ -44,7 +44,9 @@ function Nav404({setCurrentPage}) {
                         <Link to={'/create-dog'}>
                             <button className={styles.create_button}>Create Dog</button>
                         </Link>
-                        <p>About</p>
+                        <Link to={'/favorites'} style={{ textDecoration: 'none' }}>
+                            <p>Favorites</p>
+                        </Link>
                     </div>
                     <div className={styles.search}>
                         <DarkMode/>

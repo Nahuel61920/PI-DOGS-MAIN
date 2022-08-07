@@ -10,6 +10,8 @@ import {
     FILTER_CREATED,
     POST_DOG,
     DELETE_DOG,
+    ADD_FAV,
+    DELETE_FAV,
     SET_LOADING,
     ERROR
 } 
@@ -21,6 +23,7 @@ const initialState = {
     dogsFilter: [], // Array de perros filtrados
     temperamen: [],
     dogDescription: [],
+    fav: [],
     loading: true,
     error: false,
 }
@@ -60,6 +63,17 @@ const rootReducer = (state = initialState, action) => {
             
         case DELETE_DOG:
             return { ...state };
+
+        case ADD_FAV:
+            return {
+                ...state,
+                fav: [...state.fav, action.payload],
+            };
+        case DELETE_FAV:
+            return {
+                ...state,
+                fav: state.fav.filter((dog) => dog.id !== action.payload.id),
+            };
 
         case GET_DOGS_FOR_NAME:
             // filtrar los perros por nombre

@@ -2,15 +2,26 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import styles from "./cardDogs.module.css";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //
-import { getDescription } from "../../actions/actions";
+import { getDescription, addFav, deleteFav } from "../../actions/actions";
 
-function CardDogs({name, weightMin, weightMax, temperament, image, id}) {
-
+function CardDogs(props) {
+    const { name, weightMin, weightMax, image, temperament, id } = props;
+    
     const temperamentTemp = !temperament ? ["N/A"] : temperament.split(",") ; // si no hay temperamento, lo pongo en N/A
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    const { fav } = useSelector((state) => state);
+    console.log(fav);
+    const active = fav.find((dogfav) => dogfav.id === id);
+    const handleFav = (data) => {
+        const included = fav.find((dogfav) => dogfav.id === id);
+        included && dispatch(deleteFav(data));
+        !included && dispatch(addFav(data));
+    };
+    
 
     return (
         <div className ={styles.card}>
@@ -33,6 +44,12 @@ function CardDogs({name, weightMin, weightMax, temperament, image, id}) {
                         })
                     }
                 </div>
+                <button
+                    onClick={() => handleFav(props)}
+                    className={active ? styles.favActive : styles.fav}
+                >
+                *
+                </button>
             </div>
         </div>
     )
