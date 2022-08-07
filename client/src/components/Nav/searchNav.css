@@ -21,6 +21,7 @@
     padding: 0;
     position: relative;
     width: 100%;
+    z-index: -2;
 }
 
 .nav-icon-1 {
@@ -152,6 +153,7 @@
     z-index: 10;
     height: 40px;
     gap: 40px;
+    transition: all .6s ease ;
 }
 
 .create p {
@@ -191,6 +193,7 @@
         position: absolute;
         top: -700px;
         left: -2000px;
+        transition: all .6s ease ;
     }
 
     .initial.active{

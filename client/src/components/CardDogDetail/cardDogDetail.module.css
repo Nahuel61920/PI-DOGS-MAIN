@@ -9,7 +9,8 @@
     background: var(--primary-color);
 }
 
-.button_back {
+.button_back,
+.button_back_w {
     position: absolute;
     top: 0;
     left: 0;
@@ -19,6 +20,24 @@
     font-weight: bold;
     background: transparent;
     padding: 2px 6px;
+    z-index: 3;
+}
+
+
+.button_back_w button {
+    position: relative;
+    font-size: 13px;
+    letter-spacing: 3px;
+    height: 3em;
+    padding: 0 2em;
+    border: none;
+    background-color: var(--background_card);
+    color: var(--secondary-color);
+    box-shadow: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .button_back button {
@@ -37,7 +56,8 @@
     cursor: pointer;
 }
 
-.button_back button::before {
+.button_back button::before,
+.button_back_w button::before {
     content: '';
     display: block;
     position: absolute;
@@ -51,11 +71,13 @@
     transition: 0.2s;
 }
 
-.button_back button .label {
+.button_back button .label,
+.button_back_w button .label {
     position: relative;
 }
 
-.button_back button .icon {
+.button_back button .icon,
+.button_back_w button .icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,11 +90,13 @@
     transition: 0.4s;
 }
 
-.button_back button:hover::before {
+.button_back button:hover::before,
+.button_back_w button:hover::before {
     height: 100%;
 }
 
-.button_back button:hover .icon {
+.button_back button:hover .icon,
+.button_back_w button:hover .icon {
     top: 0;
     opacity: 1;
 }

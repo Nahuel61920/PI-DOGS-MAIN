@@ -65,7 +65,7 @@
     cursor: pointer;
 }
 .dot.active {
-    background: rgb(32, 32, 32);
+    background: rgb(0, 183, 255);
 }
 
 @media (max-width: 640px) {
@@ -76,5 +76,8 @@
     .next {
         top: 40%;
         right: -15px;
+    }
+    .container-dots {
+        display: none;
     }
 }

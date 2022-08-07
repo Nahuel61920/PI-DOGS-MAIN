@@ -7,7 +7,7 @@
 }
 .svg-arrow polygon, .svg-arrow path {
     transition: all 0.5s cubic-bezier(.2,1,.3,1);
-    fill: #fff;
+    fill: var(--title_page);
 }
 .svg-arrow:hover polygon, .svg-arrow:hover path {
     transition: all 1s cubic-bezier(.2,1,.3,1);

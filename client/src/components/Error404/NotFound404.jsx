@@ -1,13 +1,13 @@
 import React from 'react'
 import Footer from '../Footer/Footer'
-import Nav from '../Nav/Nav'
 import {Link} from 'react-router-dom'
 import styles from './NotFound404.module.css'
+import Nav404 from '../Nav/Nav404'
 
 function NotFound404() {
   return (
     <div>
-        <Nav/>
+        <Nav404/>
         <div className={styles.notFound404}>
             <h1 className={styles.notFound404_title}>404</h1>
             <h2>Page not found</h2>

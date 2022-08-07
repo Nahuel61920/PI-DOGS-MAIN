@@ -139,7 +139,7 @@ function Home() {
       <div className={styles.cards}>
           {charge ? (
             <div>
-              <img src="https://i.giphy.com/media/ar8zpFnzWcSbAxjJmd/giphy.webp" alt="loading" />
+              <img className={styles.loading} src="https://i.giphy.com/media/ar8zpFnzWcSbAxjJmd/giphy.webp" alt="loading" />
             </div>
           ) : currentDogs.length ? (
           currentDogs.map((dog) => (

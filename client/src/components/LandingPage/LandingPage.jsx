@@ -5,7 +5,7 @@ import styles from './landingPage.module.css';
 
 function LandingPage() {
   return (
-    <div>
+    <div className={styles.landingPage}>
       <Slider/>
       <div className={styles.container_text}>
         <h1 className={styles.title}>Pi dogs</h1>

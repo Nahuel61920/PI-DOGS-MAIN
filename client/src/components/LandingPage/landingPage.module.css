@@ -1,15 +1,17 @@
+.landingPage{
+    overflow-y: hidden;
+    height: 100vh;
+}
+
 .container_text {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 2em 6.3em;
-    padding: 0;
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    width: 85%;
-    height: 80%;
+    margin: 2em auto;
+    position: relative;
+    top: -600px;
+    width: 80%;
 }
 
 .title{
@@ -60,4 +62,15 @@
     background-color: rgb(34, 53, 54);
     transform: scaleX(1.4) scaleY(1.5);
     opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .container_text {
+        top: -500px;
+        width: 75%;
+    }
+
+    .title{
+        font-size: 8rem;
+    }
 }
